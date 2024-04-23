@@ -39,4 +39,11 @@ public class ValidadorPolimorficoTest {
     Assertions.assertFalse(validador.validarPassword(contrasenia));
   }
 
+  @Test
+  public void contraseniaInvalidaCuandoEsCorta() {
+    String contrasenia = "corta";
+    Assertions.assertFalse(validador.validarPassword(contrasenia));
+  }
+
+
 }
