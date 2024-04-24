@@ -1,0 +1,5 @@
+const config = {
+  apiKey: "AIzaSyDds84gus2thbHsEYke4vsj9U6Y3Hqs1f4",
+};
+
+export default config;
