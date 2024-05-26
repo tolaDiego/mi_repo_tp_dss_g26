@@ -1,6 +1,7 @@
 package repositorio;
 
 
+import domain.accesorios.Documento;
 import domain.personas.Humano;
 
 import java.util.ArrayList;
@@ -28,5 +29,25 @@ public class RepoHumano {
 
                 return  humanos.removeIf(humano->humano.getId()==id.intValue());
         }
+    public Humano retornarHumanoPorDoc(Documento documento) {
+        return humanos.stream()
+                .filter(humano -> humano.getDocumento().getTipoDoc() == documento.getTipoDoc() &&
+                        humano.getDocumento().getNumero().equals(documento.getNumero()))
+                .findFirst().
+                orElse(null);
     }
+
+
+    public Humano actualizarHumano(Humano nuevo) {
+
+       Humano humano=    retornarHumanoPorDoc(nuevo.getDocumento());
+
+                humano.setNombre(nuevo.getNombre());
+                humano.setApellido(nuevo.getApellido());
+                humano.setDireccion(nuevo.getDireccion());
+
+       return humano;
+        }
+
+}
 

@@ -1,5 +1,6 @@
 package servicios;
 
+import domain.accesorios.Documento;
 import domain.colaboraciones.Colaboracion;
 import domain.personas.Humano;
 import domain.personas.Juridica;
@@ -78,5 +79,28 @@ public class PersonaServicio {
 
     public boolean eliminarJuridico(Integer idUsuario) {
         return repoJuridica.eliminarJuridicaPor(idUsuario);
+    }
+
+    public Humano retornarHumanoPorId(Integer id) {
+        return  repoHumano.retornarHumanoPor(id);
+    }
+
+    public Juridica retornarJuridicaPorId(Integer id) {
+        return repoJuridica.retornarJuridicaPor(id);
+    }
+
+    public Tecnico retornarTecnicoPorId(Integer id) {
+        return repoTecnicos.retornarTecnicoPor(id);
+    }
+
+    public Vulnerable retornarVulnerablePorId(Integer id) {
+        return repoVulnerables.retornarVulnerablePor(id);
+    }
+
+    public Humano retornarHumanoPorDoc(Documento doc) {
+        return repoHumano.retornarHumanoPorDoc(doc);
+    }
+    public Humano actualizarHumano(Humano nuevo){
+      return  repoHumano.actualizarHumano(nuevo);
     }
 }

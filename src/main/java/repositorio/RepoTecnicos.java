@@ -13,15 +13,21 @@ public class RepoTecnicos {
     public List<Tecnico> retornarTecnicos() {
         return tecnicos;
     }
-    public Tecnico retornarHumanoPor(Integer id) {
+    public Tecnico retornarTecnicoPorId(Integer id) {
         return tecnicos.stream()
                 .filter(t -> t.getId()== id.intValue())
                 .findFirst()
                 .orElse(null);
     }
-
+    public Tecnico retornarTecnicoPor(Integer id) {
+        return tecnicos.stream()
+                .filter(t -> t.getId()== id.intValue())
+                .findFirst()
+                .orElse(null);
+    }
     public boolean eliminarTecnicoPor(Integer id) {
         return    tecnicos.removeIf(t->t.getId()==id.intValue());
     }
+
 
 }

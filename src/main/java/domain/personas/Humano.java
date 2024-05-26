@@ -1,6 +1,7 @@
 package domain.personas;
 
 import domain.accesorios.Contacto;
+import domain.accesorios.Documento;
 import domain.colaboraciones.Colaboracion;
 import domain.colaboraciones.DistribucionVianda;
 import domain.colaboraciones.DonacionVianda;
@@ -13,9 +14,8 @@ import java.util.List;
 
 @Setter
 @Getter
-
 public class Humano  {
-
+    private Documento documento;
     private int id=0;
 
     private String nombre;
