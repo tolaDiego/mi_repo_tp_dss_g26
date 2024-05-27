@@ -10,10 +10,14 @@ public class DonacionDinero implements Colaboracion {
     public Date fechaDonacion;
     public double monto;
     public  String frecuencia;//por dia,mensual,anual, quincenal,etc
-    private double coefPorDinero=0.5;
-public DonacionDinero(){
+    private double coefPorDinero;
 
-}
+    public DonacionDinero(String tipo){
+
+        this.monto=1;
+        this.coefPorDinero=0.5;
+    }
+    public DonacionDinero(){}
     @Override
     public double puntaje() {
         return coefPorDinero*monto;

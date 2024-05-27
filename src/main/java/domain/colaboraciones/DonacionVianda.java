@@ -8,9 +8,16 @@ import lombok.Setter;
 @Setter
 public class DonacionVianda implements Colaboracion{
     private Vianda vianda;
-    private double coefPorViandas= 1.5;
+    private double coefPorViandas;
     private  boolean entregada;
-    public DonacionVianda(){}
+    public DonacionVianda(String tipo){
+        this.vianda=new Vianda();
+        this.coefPorViandas=1.5;
+
+    }
+    public DonacionVianda(){
+
+    }
     @Override
     public double puntaje() {
         return coefPorViandas;

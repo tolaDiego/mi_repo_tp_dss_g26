@@ -1,23 +1,15 @@
 package domain.accesorios;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+@AllArgsConstructor
 public  class Contacto {
-    private String contacto;
     private String tipoContacto;
+    private String contacto;
 
 
-    public void setContacto(String contacto) {
-        this.contacto = contacto;
-    }
-
-    public String getTipoContacto() {
-        return tipoContacto;
-    }
-
-    public void setTipoContacto(String tipoContacto) {
-        this.tipoContacto = tipoContacto;
-    }
-
-    public String getContacto() {
-        return contacto;
-    }
 }

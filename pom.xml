@@ -82,9 +82,14 @@
       <version>1.18.24</version> <!-- Verifica la última versión en el repositorio de Lombok -->
       <scope>provided</scope>
     </dependency>
+    <!-- dependencia para enviar emails-->
+    <dependency>
+      <groupId>com.resend</groupId>
+      <artifactId>resend-java</artifactId>
+      <version>3.1.0</version>
+    </dependency>
 
   </dependencies>
-
   <build>
     <plugins>
       <plugin>

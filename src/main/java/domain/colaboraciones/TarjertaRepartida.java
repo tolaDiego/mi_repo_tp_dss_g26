@@ -7,9 +7,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TarjertaRepartida implements   Colaboracion{
-    private Tarjeta Tarjeta;
-   private double coefPorTarjeta =2;
-   public TarjertaRepartida(){}
+    private Tarjeta tarjeta;
+   private double coefPorTarjeta;
+   public TarjertaRepartida(){
+       this.coefPorTarjeta=2;
+       this.tarjeta=new Tarjeta();
+   }
    @Override
    public double puntaje(){
        return coefPorTarjeta;

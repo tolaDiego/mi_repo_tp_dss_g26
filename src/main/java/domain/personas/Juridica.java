@@ -25,5 +25,8 @@ public class Juridica {
     return colaboraciones.stream().mapToDouble(colab->colab.puntaje()).sum();
     }
 
+    public boolean agregarColacoracion(Colaboracion colaboracion) {
+        return this.colaboraciones.add(colaboracion);
+    }
 }
 

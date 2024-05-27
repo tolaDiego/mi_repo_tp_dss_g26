@@ -1,9 +1,15 @@
 package controladores;
 
 
+
+import com.resend.Resend;
+import com.resend.core.exception.ResendException;
+import com.resend.services.emails.model.CreateEmailOptions;
+import com.resend.services.emails.model.CreateEmailResponse;
+import domain.accesorios.CamposArchivo;
 import domain.accesorios.Documento;
 import domain.accesorios.TipoDocumento;
-import domain.colaboraciones.Colaboracion;
+import domain.colaboraciones.*;
 import domain.personas.Humano;
 import domain.personas.Juridica;
 import domain.personas.Tecnico;
@@ -12,8 +18,16 @@ import io.javalin.Javalin;
 import io.javalin.http.Handler;
 import servicios.PersonaServicio;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 public class PersonasController {
@@ -36,6 +50,7 @@ public class PersonasController {
         app.get("/retornar/vulnerable/{id}",retornarVulnerablePorId);
         app.get("/actualizar/humano/{tipoDoc}/{numero}",retornarHumanoPorDoc);
         app.put("/actualizar/humano/{tipoDoc}/{numero}",actualizarHumano);
+        app.post("/importar",cargarColaboradores   );
     }
     int codigoRegistroOk=200;
     int getCodigoRegistroNoOk=400;
@@ -267,6 +282,88 @@ String errorEliminacion=" error al eliminar";
 
         }
     };
+    private Handler cargarColaboradores=ctx->{
+        InputStream archivo = ctx.uploadedFile("file").content();
+        List<String> lines = new BufferedReader(new InputStreamReader(archivo))
+                .lines().collect(Collectors.toList());
+        List<String> errores = new ArrayList<>();
+        for (String line : lines) {
+            String[] columns = line.split(",");
+            if (columns.length != 8) {
+                errores.add("Formato incorrecto en la línea: " + line);
+                continue;
+            }
+
+            CamposArchivo datos = new CamposArchivo(
+                    columns[0], columns[1], columns[2], columns[3],
+                    columns[4], columns[5], columns[6], columns[7]
+            );
+
+            // Validar los datos según las especificaciones
+            if (!validarDatos(datos)) {
+                errores.add("Datos inválidos en la línea: " + line);
+                continue;
+            }
+
+            // Buscar o crear usuario
+            Documento doc=new Documento(TipoDocumento.valueOf(datos.getTipoDoc()), datos.getDocumento());
+
+            Humano humano;
+            humano = personaServicio.retornarHumanoPorDoc(doc);
+            if (humano == null) {
+                humano = new Humano(datos);
+                personaServicio.agregarhumano(humano);
+
+                //envio de email
+                enviarEmail(datos);
+            }
+            // Registrar colaboración
+            Integer cantidad= Integer.parseInt(datos.getCantidad());
+            for(int i=0;i<cantidad;i++){
+                Colaboracion colab=instanciarColaboracion(datos.getFormaColaboracion());
+
+                personaServicio.agregarColaboracionHumano( personaServicio.retornarHumanoPorDoc(doc).getId(), colab);
+            }
+
+
+        }
+
+    };
+    public void enviarEmail(CamposArchivo datos){
+        Resend resend = new Resend("re_frsxaaWH_Gb7F15z6WYxm2U3VaAgeyTfb");
+
+        CreateEmailOptions params = CreateEmailOptions.builder()
+                .from("Acme <onboarding@resend.dev>")
+                .to(datos.getMail())
+                .subject("sistema_viandas")
+                .html("<strong>hello world</strong>")
+                .build();
+
+        try {
+            CreateEmailResponse data = resend.emails().send(params);
+        } catch (ResendException e) {
+            e.printStackTrace();
+        }
+    }
+    public Colaboracion instanciarColaboracion(String tipo){
+        Colaboracion colaboracion = null;
+        if("DINERO".equals(tipo)){
+            colaboracion= new DonacionDinero(tipo);
+        }if("DONACION_VIANDAS".equals(tipo)){
+
+            colaboracion=new DonacionVianda(tipo);
+        }if("ENTREGA_TARJETAS".equals(tipo)){
+            colaboracion= new TarjertaRepartida();
+        }if("REDISTRIBUCION_VIANDAS".equals(tipo)){
+            colaboracion=new DistribucionVianda();
+        }
+        return colaboracion;
+    }
+
+    public boolean validarDatos(CamposArchivo datos) {
+        //TODO Implementar la validación de cada campo según las especificaciones
+        return true;
+    }
 String okColbAgregada="Colaboración agregada";
 String noSeAgregoColab="Humano no encontrado";
     private final Handler agregarColaboracionHumano = ctx -> {
@@ -291,4 +388,5 @@ String noSeAgregoColab="Humano no encontrado";
     };
 
 }
+
 

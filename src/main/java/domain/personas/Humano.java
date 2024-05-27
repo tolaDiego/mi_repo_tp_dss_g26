@@ -1,7 +1,9 @@
 package domain.personas;
 
+import domain.accesorios.CamposArchivo;
 import domain.accesorios.Contacto;
 import domain.accesorios.Documento;
+import domain.accesorios.TipoDocumento;
 import domain.colaboraciones.Colaboracion;
 import domain.colaboraciones.DistribucionVianda;
 import domain.colaboraciones.DonacionVianda;
@@ -9,6 +11,7 @@ import domain.colaboraciones.TarjertaRepartida;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,12 +27,24 @@ public class Humano  {
 
     private String direccion;
 
-    private Date fechaNacimiento ;
+    private Date fechaNacimiento;
     private List<Contacto> contactos;
     private List<Colaboracion> colaboraciones;
 
     public Humano(){
+        this.colaboraciones=new ArrayList<>();
+        this.contactos=new ArrayList<>();
+    }
+    public Humano(CamposArchivo datos){
+        this.colaboraciones=new ArrayList<>();
+        this.contactos=new ArrayList<>();
 
+        this.documento = new Documento(TipoDocumento.valueOf(datos.getTipoDoc()),datos.getDocumento());
+
+        this.nombre = datos.getNombre();
+        this.apellido = datos.getApellido();
+        Contacto contacto=new Contacto("MAIL",datos.getMail());
+        this.contactos.add(contacto);
     }
 
     public int cantTarjetasRepartidas(){
@@ -58,7 +73,9 @@ public class Humano  {
         }
         return cantidad;
     }
-
+    public boolean agregarColaboracion(Colaboracion colab){
+        return  this.colaboraciones.add(colab);
+    }
     public double puntaje() {
         return  colaboraciones.stream().mapToDouble(colab->colab.puntaje()).sum();
     }

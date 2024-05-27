@@ -21,34 +21,42 @@ public class PersonaServicio {
     private final RepoTecnicos repoTecnicos=new RepoTecnicos();
     private final RepoVulnerables repoVulnerables=new RepoVulnerables();
     public Humano agregarhumano(Humano humano){
-        humano.setId((int) id.incrementAndGet());
-        if(repoHumano.agregarHumano(humano))
+        humano.setId(id.incrementAndGet());
+        if(repoHumano.agregarHumano(humano)){
+            System.out.println("se creo el usuario"+ humano);
             return humano;
+        }
        else
            return null;
     }
     public Juridica agregarOrganisacion(Juridica organizacion){
-        organizacion.setId((int) id.incrementAndGet());
-        if(repoJuridica.agregarJuridica(organizacion))
+        organizacion.setId(id.incrementAndGet());
+        if(repoJuridica.agregarJuridica(organizacion)){
+            System.out.println("se creo el usuario"+ organizacion);
             return organizacion;
+        }
         else
             return null;
 
     }
 
     public Tecnico agregarTecnico(Tecnico tecnico) {
-        tecnico.setId((int) id.incrementAndGet());
-        if(repoTecnicos.agregarTecnico(tecnico))
+        tecnico.setId(id.incrementAndGet());
+        if(repoTecnicos.agregarTecnico(tecnico)){
+            System.out.println("se creo el usuario"+ tecnico);
             return tecnico;
+        }
         else
             return null;
 
     }
 
     public Vulnerable agregarVulnerable(Vulnerable vulnerable) {
-        vulnerable.setId((int) id.incrementAndGet());
-        if(repoVulnerables.agregarVulnerable(vulnerable))
+        vulnerable.setId(id.incrementAndGet());
+        if(repoVulnerables.agregarVulnerable(vulnerable)){
+            System.out.println("se creo el usuario"+ vulnerable);
             return vulnerable;
+        }
         else
             return null;
 
@@ -56,11 +64,15 @@ public class PersonaServicio {
 
 
     public boolean agregarColaboracionHumano(Integer idUsuario, Colaboracion colaboracion) {
-        return false;
+        Humano humano=repoHumano.retornarHumanoPor(idUsuario);
+
+        return  humano.agregarColaboracion(colaboracion);
     }
 
     public boolean agregarColaboracionJuridico(Integer idUsuario, Colaboracion colaboracion) {
-    return false;
+        Juridica juridica=repoJuridica.retornarJuridicaPor(idUsuario);
+        juridica.agregarColacoracion(colaboracion);
+        return false;
     }
 
     public boolean eliminarHumano(Integer idUsuario) {
