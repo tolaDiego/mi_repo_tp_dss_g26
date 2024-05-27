@@ -16,6 +16,8 @@ import domain.personas.Tecnico;
 import domain.personas.Vulnerable;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
+import javassist.tools.reflect.Reflection;
+import org.hibernate.annotations.common.reflection.ReflectionUtil;
 import servicios.PersonaServicio;
 
 import java.io.BufferedReader;
@@ -48,7 +50,7 @@ public class PersonasController {
         app.get("/retornar/juridica/{id}",retornarJuridicaPorId);
         app.get("/retornar/tecnico/{id}",retornarTecnicoPorId);
         app.get("/retornar/vulnerable/{id}",retornarVulnerablePorId);
-        app.get("/actualizar/humano/{tipoDoc}/{numero}",retornarHumanoPorDoc);
+        app.get("/retornar/humano/{tipoDoc}/{numero}",retornarHumanoPorDoc);
         app.put("/actualizar/humano/{tipoDoc}/{numero}",actualizarHumano);
         app.post("/importar",cargarColaboradores   );
     }
@@ -285,7 +287,7 @@ String errorEliminacion=" error al eliminar";
     private Handler cargarColaboradores=ctx->{
         InputStream archivo = ctx.uploadedFile("file").content();
         List<String> lines = new BufferedReader(new InputStreamReader(archivo))
-                .lines().collect(Collectors.toList());
+                .lines().toList();
         List<String> errores = new ArrayList<>();
         for (String line : lines) {
             String[] columns = line.split(",");
@@ -294,12 +296,12 @@ String errorEliminacion=" error al eliminar";
                 continue;
             }
 
+            // Validar los datos según las especificaciones
             CamposArchivo datos = new CamposArchivo(
                     columns[0], columns[1], columns[2], columns[3],
                     columns[4], columns[5], columns[6], columns[7]
             );
 
-            // Validar los datos según las especificaciones
             if (!validarDatos(datos)) {
                 errores.add("Datos inválidos en la línea: " + line);
                 continue;
@@ -320,7 +322,7 @@ String errorEliminacion=" error al eliminar";
             // Registrar colaboración
             Integer cantidad= Integer.parseInt(datos.getCantidad());
             for(int i=0;i<cantidad;i++){
-                Colaboracion colab=instanciarColaboracion(datos.getFormaColaboracion());
+                Colaboracion colab=instanciarColaboracion(datos);
 
                 personaServicio.agregarColaboracionHumano( personaServicio.retornarHumanoPorDoc(doc).getId(), colab);
             }
@@ -334,9 +336,9 @@ String errorEliminacion=" error al eliminar";
 
         CreateEmailOptions params = CreateEmailOptions.builder()
                 .from("Acme <onboarding@resend.dev>")
-                .to(datos.getMail())
+                .to(""+datos.getMail())
                 .subject("sistema_viandas")
-                .html("<strong>hello world</strong>")
+                .html("<strong>hello world "+ datos.getNombre()+"</strong>")
                 .build();
 
         try {
@@ -345,18 +347,13 @@ String errorEliminacion=" error al eliminar";
             e.printStackTrace();
         }
     }
-    public Colaboracion instanciarColaboracion(String tipo){
+    public Colaboracion instanciarColaboracion(CamposArchivo tipo){
         Colaboracion colaboracion = null;
-        if("DINERO".equals(tipo)){
-            colaboracion= new DonacionDinero(tipo);
-        }if("DONACION_VIANDAS".equals(tipo)){
+        if("DINERO".equals(tipo.getFormaColaboracion())) colaboracion = new DonacionDinero(tipo);
+        if("DONACION_VIANDAS".equals(tipo.getFormaColaboracion())) colaboracion = new DonacionVianda(tipo);
+        if("ENTREGA_TARJETAS".equals(tipo.getFormaColaboracion())) colaboracion = new TarjertaRepartida();
+        if("REDISTRIBUCION_VIANDAS".equals(tipo.getFormaColaboracion())) colaboracion=new DistribucionVianda(tipo);
 
-            colaboracion=new DonacionVianda(tipo);
-        }if("ENTREGA_TARJETAS".equals(tipo)){
-            colaboracion= new TarjertaRepartida();
-        }if("REDISTRIBUCION_VIANDAS".equals(tipo)){
-            colaboracion=new DistribucionVianda();
-        }
         return colaboracion;
     }
 

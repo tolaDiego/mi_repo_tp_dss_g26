@@ -1,6 +1,5 @@
-Tipo Doc,Documento,Nombre,Apellido,Mail,Fecha de colaboracion,Forma de colaboracion,Cantidad
-DNI,12345678,Carlos,reinosa,dtolaquispe@frba.utn.edu.ar,11/2/2003,DINERO,1
-LE,12345678,Juan,piñeiro,dtolaquispe@frba.utn.edu.ar,1/2/2030,DONACION_VIANDAS,2
-LC,54321,Martin,cuello,dtolaquispe@frba.utn.edu.ar,2/2/2000,REDISTRIBUCION_VIANDAS,3
-DNI,54321,kevin,macalister,dtolaquispe@frba.utn.edu.ar,5/4/2010,ENTREGA_TARJETAS,4
-LC,87654,lucas,belda,dtolaquispe@frba.utn.edu.ar,8/9/2005,ENTREGA_TARJETAS,5
+DNI,12345678,Carlos,reinosa,dddjtola@gmail.com,11/2/2003,DINERO,1
+LE,12345678,Juan,piñeiro,dddjtola@gmail.com,1/2/2030,DONACION_VIANDAS,2
+LC,54321,Martin,cuello,dddjtola@gmail.com,2/2/2000,REDISTRIBUCION_VIANDAS,3
+DNI,54321,kevin,macalister,dddjtola@gmail.com,5/4/2010,ENTREGA_TARJETAS,4
+LC,87654,lucas,belda,dddjtola@gmail.com,8/9/2005,ENTREGA_TARJETAS,5
