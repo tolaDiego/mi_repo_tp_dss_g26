@@ -2,34 +2,42 @@ package controladores;
 
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.resend.Resend;
 import com.resend.core.exception.ResendException;
 import com.resend.services.emails.model.CreateEmailOptions;
 import com.resend.services.emails.model.CreateEmailResponse;
 import domain.accesorios.CamposArchivo;
 import domain.accesorios.Documento;
+import domain.accesorios.PuntoUbicacion;
 import domain.accesorios.TipoDocumento;
 import domain.colaboraciones.*;
+
 import domain.personas.Humano;
 import domain.personas.Juridica;
 import domain.personas.Tecnico;
 import domain.personas.Vulnerable;
 import io.javalin.Javalin;
+import io.javalin.http.Context;
 import io.javalin.http.Handler;
-import javassist.tools.reflect.Reflection;
-import org.hibernate.annotations.common.reflection.ReflectionUtil;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import servicios.PersonaServicio;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.http.HttpResponse;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
 
 
 public class PersonasController {
@@ -51,8 +59,13 @@ public class PersonasController {
         app.get("/retornar/tecnico/{id}",retornarTecnicoPorId);
         app.get("/retornar/vulnerable/{id}",retornarVulnerablePorId);
         app.get("/retornar/humano/{tipoDoc}/{numero}",retornarHumanoPorDoc);
+        app.post("/agregar_colaboracion/humano/{id}/{tipoColab}",agregarColaboracionHumano);
+        app.post("agregar_colaboracion/juridica/{id}/{tipoColab}",agregarColaboracionJuridico);
         app.put("/actualizar/humano/{tipoDoc}/{numero}",actualizarHumano);
-        app.post("/importar",cargarColaboradores   );
+        app.post("/importar", cargarColaboradores);
+        app.get("/retornar/puntos/{tipoPersona}/{id}",retornarPuntos);
+        app.get("/ubicaciones_recomendadas/{latitud}/{longitud}/{radio}",recomendarUbicaciones);
+        app.put("/canjear_puntos/{persona}/{id}",canjearPuntos);
     }
     int codigoRegistroOk=200;
     int getCodigoRegistroNoOk=400;
@@ -112,8 +125,11 @@ public class PersonasController {
 
     private final Handler crearUsuarioVulnerable= ctx->{
 
-        Map<String, Object> response = new HashMap<>();
         Vulnerable vulnerable=personaServicio.agregarVulnerable(ctx.bodyAsClass(Vulnerable.class));
+        TarjertaRepartida colaboracion=new TarjertaRepartida();
+
+
+        Map<String, Object> response = new HashMap<>();
         if(vulnerable!=null){
 
             response.put("usuario", vulnerable);
@@ -329,7 +345,17 @@ String errorEliminacion=" error al eliminar";
 
 
         }
+        Map<String, Object> response = new HashMap<>();
+        if(errores.size()==0){
+            response.put("mensaje","se cargaron todos los datos");
+            response.put("codigo",200);
 
+        }else{
+            response.put("mensaje","no se cargaron todos los datos");
+            response.put("codigo",400);
+            response.put("errores",errores);
+        }
+        ctx.json(response);
     };
     public void enviarEmail(CamposArchivo datos){
         Resend resend = new Resend("re_frsxaaWH_Gb7F15z6WYxm2U3VaAgeyTfb");
@@ -362,28 +388,135 @@ String errorEliminacion=" error al eliminar";
         return true;
     }
 String okColbAgregada="Colaboración agregada";
-String noSeAgregoColab="Humano no encontrado";
+String noSeAgregoColab="no se logro agregar la colaboracion";
     private final Handler agregarColaboracionHumano = ctx -> {
+        String tipoColab=ctx.pathParam("tipoColab");
+      //en el caso de repartirTarjetas se registra a la persona vulnerable
+        Colaboracion colaboracion=this.generarColabSegunElTipo(tipoColab,ctx);
         Integer idUsuario = Integer.parseInt(ctx.pathParam("id"));
-        Colaboracion colaboracion = ctx.bodyAsClass(Colaboracion.class);
+
+        Map<String, Object> response = new HashMap<>();
 
         if ( personaServicio.agregarColaboracionHumano(idUsuario, colaboracion)) {
-            ctx.status(201).result(okColbAgregada);
+            response.put("usuario", personaServicio.retornarHumanoPorId(idUsuario));
+            response.put("mensaje", okColbAgregada);
+            response.put("codigo", 200);
+            ctx.status(200);
+            ctx.json(response);
         } else {
-            ctx.status(404).result(noSeAgregoColab);
+            response.put("mensaje", noSeAgregoColab);
+            response.put("codigo", 400);
+            ctx.status(400);
+            ctx.json(response);
         }
+
     };
+    public Colaboracion generarColabSegunElTipo(String tipo, Context ctx){
+        Colaboracion colab = null;
+        if("DINERO".equals(tipo)) colab=ctx.bodyAsClass(DonacionDinero.class);
+        if("DONACION_VIANDAS".equals(tipo)) colab=ctx.bodyAsClass(DonacionVianda.class);
+        if("ENTREGA_TARJETAS".equals(tipo)) {
+            colab=ctx.bodyAsClass(TarjertaRepartida.class);
+            TarjertaRepartida c=ctx.bodyAsClass(TarjertaRepartida.class);
+            personaServicio.agregarVulnerable(c.getPersonaTitular());
+        }
+        if("REDISTRIBUCION_VIANDAS".equals(tipo)) colab=ctx.bodyAsClass(DistribucionVianda.class);
+        if("SERVICIO_ADMIN".equals(tipo)) colab=ctx.bodyAsClass(ServicioAdministracion.class);
+        if ("COLAB_OFERTA".equals(tipo)) colab=ctx.bodyAsClass(ColabOferta.class);
+        return colab;
+    }
     private final Handler agregarColaboracionJuridico = ctx -> {
+        String tipoColab=ctx.pathParam("tipoColab");
         Integer idUsuario = Integer.parseInt(ctx.pathParam("id"));
-        Colaboracion colaboracion = ctx.bodyAsClass(Colaboracion.class);
+        Colaboracion colaboracion = generarColabSegunElTipo(tipoColab,ctx);
+
+        Map<String, Object> response = new HashMap<>();
 
         if ( personaServicio.agregarColaboracionJuridico(idUsuario, colaboracion)) {
-            ctx.status(201).result(okColbAgregada);
+            response.put("usuario", personaServicio.retornarJuridicaPorId(idUsuario));
+            response.put("mensaje", okColbAgregada);
+            response.put("codigo", 200);
+            ctx.status(200);
+            ctx.json(response);
         } else {
-            ctx.status(404).result(noSeAgregoColab);
+            response.put("mensaje", noSeAgregoColab);
+            response.put("codigo", 400);
+            ctx.status(400);
+            ctx.json(response);
         }
-    };
 
+    };
+    private Handler retornarPuntos=ctx->{
+        int id=Integer.parseInt(ctx.pathParam("id"));
+        String tipoPersona=ctx.pathParam("tipoPersona");
+        double puntos= personaServicio.retornarPuntos(tipoPersona,id);
+        Map<String, Object> response = new HashMap<>();
+        if(puntos!=-1){
+            response.put("mensaje","puntos calculados correctamente");
+            response.put("puntos",puntos);
+        response.put("codigo", 200);
+        ctx.status(200);
+        }else{
+            response.put("mensaje", noOkRetornoUsuario);
+            response.put("codigo", 400);
+            ctx.status(400);
+        }
+        ctx.json(response);
+
+    };
+    private Handler recomendarUbicaciones =ctx->{
+        String latitud=ctx.pathParam("latitud");
+        String longitud=ctx.pathParam( "longitud");
+        String radio=ctx.pathParam("radio");
+        Map<String, Object> response = new HashMap<>();
+        try {
+
+            List<PuntoUbicacion> puntosRecomendados = consultaRecomendaciones(latitud,longitud,radio);
+            response.put("mensaje", " puntos recomendados");
+            response.put("codigo",200);
+            response.put("ubicaciones",puntosRecomendados);
+
+            ctx.json(response);
+        } catch (Exception e) {
+            response.put("codigo",400);
+            response.put("mensaje",  e.getMessage());
+            ctx.json(response);
+        }
+
+
+    };
+    public List<PuntoUbicacion> consultaRecomendaciones(String lat, String longi,  String radio) throws IOException {
+
+        String urlApi = String.format( "https://9202a509-840f-45cd-8320-7cada690550f.mock.pstmn.io/recomendar/%s/%s/%s" , lat,longi,radio);
+        System.out.println("url a consultar "+urlApi);
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(urlApi)
+
+                .build();
+
+        try(Response response = client.newCall(request).execute()) {
+
+            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(
+                    response.body().string()
+                    , new TypeReference<List<PuntoUbicacion>>() {
+                    }
+            );
+
+        }
+
+    }
+    private  Handler canjearPuntos =ctx->{
+         String tipoPersona=ctx.pathParam("persona");
+
+         int id=Integer.parseInt(ctx.pathParam("id"));
+         if("JURIDICA".equals(tipoPersona) ){
+            Juridica perso=personaServicio.retornarJuridicaPorId(id);
+
+         }
+    };
 }
 
 

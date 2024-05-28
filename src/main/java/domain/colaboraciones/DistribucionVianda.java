@@ -1,5 +1,6 @@
 package domain.colaboraciones;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import domain.accesorios.CamposArchivo;
 import domain.objetos.Heladera;
 import lombok.Getter;
@@ -15,11 +16,15 @@ public class DistribucionVianda implements Colaboracion {
     private Heladera destino;
     private int cantidadViandas;
     private  String motivo;
+    @JsonFormat(shape =JsonFormat.Shape.STRING,pattern = "dd/mm/yyyy")
     private Date fechaDistribucion;
 
     private  double coefPorDistribuir;
 
-    public DistribucionVianda(){}
+    public DistribucionVianda(){
+
+        this.coefPorDistribuir=1;
+    }
     public DistribucionVianda(CamposArchivo datos){
         SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
         this.coefPorDistribuir=1;
