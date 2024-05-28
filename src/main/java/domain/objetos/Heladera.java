@@ -3,7 +3,7 @@ package domain.objetos;
 import domain.accesorios.Ubicacion;
 
 import java.util.Calendar;
-
+import java.util.List;
 
 
 public class Heladera {
@@ -12,6 +12,7 @@ public class Heladera {
     private Ubicacion ubicacion;
     private SensorDeMovimiento sensorMovimiento;
     private SensorTemperatura sensorTemperatura;
+    private List<Vianda> viandas;
     public boolean estaActiva() {
         return true;
     }
@@ -25,5 +26,13 @@ public class Heladera {
 
 
       return Math.abs((anioFinal-anioInicial)*12+mesFinal-mesInicio);
+    }
+
+    public void sacarVianda(int idVianda){
+      viandas.remove(idVianda);
+    }
+
+    public void agregarViandas(List<Vianda> viandasNuevas){
+      viandas.addAll(viandasNuevas);
     }
 }
