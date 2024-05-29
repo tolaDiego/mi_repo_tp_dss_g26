@@ -1,6 +1,7 @@
 package domain.colaboraciones;
 
 import domain.objetos.Tarjeta;
+import domain.personas.Vulnerable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,9 +10,10 @@ import lombok.Setter;
 public class TarjertaRepartida implements   Colaboracion{
     private Tarjeta tarjeta;
    private double coefPorTarjeta;
+    private Vulnerable personaTitular;
    public TarjertaRepartida(){
        this.coefPorTarjeta=2;
-       this.tarjeta=new Tarjeta();
+
    }
    @Override
    public double puntaje(){

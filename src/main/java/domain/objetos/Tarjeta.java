@@ -1,15 +1,17 @@
 package domain.objetos;
 
 import domain.accesorios.Uso;
-import domain.personas.Vulnerable;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
-
+@Setter
+@Getter
 public class Tarjeta {
     private int cantidadDeUsosDelDia;
     private long codigoTarjeta;
 
     private List<Uso> usos;
-    private Vulnerable personaTitular;
 
+    public Tarjeta(){}
 }

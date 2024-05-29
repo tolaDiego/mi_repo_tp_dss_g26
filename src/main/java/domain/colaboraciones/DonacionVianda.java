@@ -17,6 +17,7 @@ public class DonacionVianda implements Colaboracion{
 
     }
     public DonacionVianda(){
+        this.coefPorViandas=1.5;
 
     }
     @Override

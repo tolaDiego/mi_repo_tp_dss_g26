@@ -9,6 +9,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Documento {
     private TipoDocumento tipoDoc;
-    private String numero;
+    private Integer numero;
     public Documento(){}
+
+    public Documento(TipoDocumento tipoDoc, String numero) {
+    }
 }

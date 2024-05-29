@@ -18,66 +18,64 @@ public class PersonaServicio {
     private final AtomicInteger id = new AtomicInteger();
     private final RepoHumano repoHumano = new RepoHumano();
     private final RepoJuridica repoJuridica = new RepoJuridica();
-    private final RepoTecnicos repoTecnicos=new RepoTecnicos();
-    private final RepoVulnerables repoVulnerables=new RepoVulnerables();
-    public Humano agregarhumano(Humano humano){
+    private final RepoTecnicos repoTecnicos = new RepoTecnicos();
+    private final RepoVulnerables repoVulnerables = new RepoVulnerables();
+
+    public Humano agregarhumano(Humano humano) {
         humano.setId(id.incrementAndGet());
-        if(repoHumano.agregarHumano(humano)){
-            System.out.println("se creo el usuario"+ humano);
+        if (repoHumano.agregarHumano(humano)) {
+            System.out.println("se creo el usuario" + humano);
             return humano;
-        }
-       else
-           return null;
+        } else
+            return null;
     }
-    public Juridica agregarOrganisacion(Juridica organizacion){
+
+    public Juridica agregarOrganisacion(Juridica organizacion) {
         organizacion.setId(id.incrementAndGet());
-        if(repoJuridica.agregarJuridica(organizacion)){
-            System.out.println("se creo el usuario"+ organizacion);
+        if (repoJuridica.agregarJuridica(organizacion)) {
+            System.out.println("se creo el usuario" + organizacion);
             return organizacion;
-        }
-        else
+        } else
             return null;
 
     }
 
     public Tecnico agregarTecnico(Tecnico tecnico) {
         tecnico.setId(id.incrementAndGet());
-        if(repoTecnicos.agregarTecnico(tecnico)){
-            System.out.println("se creo el usuario"+ tecnico);
+        if (repoTecnicos.agregarTecnico(tecnico)) {
+            System.out.println("se creo el usuario" + tecnico);
             return tecnico;
-        }
-        else
+        } else
             return null;
 
     }
 
     public Vulnerable agregarVulnerable(Vulnerable vulnerable) {
         vulnerable.setId(id.incrementAndGet());
-        if(repoVulnerables.agregarVulnerable(vulnerable)){
-            System.out.println("se creo el usuario"+ vulnerable);
+        if (repoVulnerables.agregarVulnerable(vulnerable)) {
+            System.out.println("se creo el usuario" + vulnerable);
             return vulnerable;
-        }
-        else
+        } else
             return null;
 
     }
 
 
     public boolean agregarColaboracionHumano(Integer idUsuario, Colaboracion colaboracion) {
-        Humano humano=repoHumano.retornarHumanoPor(idUsuario);
+        Humano humano = repoHumano.retornarHumanoPor(idUsuario);
 
-        return  humano.agregarColaboracion(colaboracion);
+        return humano.agregarColaboracion(colaboracion);
     }
 
     public boolean agregarColaboracionJuridico(Integer idUsuario, Colaboracion colaboracion) {
-        Juridica juridica=repoJuridica.retornarJuridicaPor(idUsuario);
+        Juridica juridica = repoJuridica.retornarJuridicaPor(idUsuario);
         juridica.agregarColacoracion(colaboracion);
         return false;
     }
 
     public boolean eliminarHumano(Integer idUsuario) {
 
-        return   repoHumano.eliminarHumanoPor(idUsuario);
+        return repoHumano.eliminarHumanoPor(idUsuario);
     }
 
     public boolean eliminarTecnico(Integer idUsuario) {
@@ -85,7 +83,7 @@ public class PersonaServicio {
     }
 
     public boolean eliminarVulnerable(Integer idUsuario) {
-        return  repoVulnerables.eliminarVulnerablesPor(idUsuario);
+        return repoVulnerables.eliminarVulnerablesPor(idUsuario);
 
     }
 
@@ -94,7 +92,7 @@ public class PersonaServicio {
     }
 
     public Humano retornarHumanoPorId(Integer id) {
-        return  repoHumano.retornarHumanoPor(id);
+        return repoHumano.retornarHumanoPor(id);
     }
 
     public Juridica retornarJuridicaPorId(Integer id) {
@@ -112,7 +110,21 @@ public class PersonaServicio {
     public Humano retornarHumanoPorDoc(Documento doc) {
         return repoHumano.retornarHumanoPorDoc(doc);
     }
-    public Humano actualizarHumano(Humano nuevo){
-      return  repoHumano.actualizarHumano(nuevo);
+
+    public Humano actualizarHumano(Humano nuevo) {
+        return repoHumano.actualizarHumano(nuevo);
     }
-}
+
+    public double retornarPuntos(String tipopersona,int id) {
+        double puntos = -1;
+        if (tipopersona.equals("HUMANO")) {
+            puntos = retornarHumanoPorId(id).puntaje();
+
+        }
+        if (tipopersona.equals("JURIDICA")) {
+            puntos = retornarJuridicaPorId(id).puntaje();
+        }
+
+        return puntos;
+    }
+    }

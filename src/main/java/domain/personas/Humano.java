@@ -1,5 +1,6 @@
 package domain.personas;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import domain.accesorios.CamposArchivo;
 import domain.accesorios.Contacto;
 import domain.accesorios.Documento;
@@ -26,19 +27,20 @@ public class Humano  {
     private   String apellido;
 
     private String direccion;
-
+    @JsonFormat(shape =JsonFormat.Shape.STRING,pattern = "dd/mm/yyyy")
     private Date fechaNacimiento;
     private List<Contacto> contactos;
     private List<Colaboracion> colaboraciones;
-
+    private double puntosCanjeados;
     public Humano(){
+        puntosCanjeados=0;
         this.colaboraciones=new ArrayList<>();
         this.contactos=new ArrayList<>();
     }
     public Humano(CamposArchivo datos){
         this.colaboraciones=new ArrayList<>();
         this.contactos=new ArrayList<>();
-
+        puntosCanjeados=0;
         this.documento = new Documento(TipoDocumento.valueOf(datos.getTipoDoc()),datos.getDocumento());
 
         this.nombre = datos.getNombre();
@@ -77,9 +79,14 @@ public class Humano  {
         return  this.colaboraciones.add(colab);
     }
     public double puntaje() {
-        return  colaboraciones.stream().mapToDouble(colab->colab.puntaje()).sum();
+        return  colaboraciones.stream().mapToDouble(colab->colab.puntaje()).sum()-puntosCanjeados;
+    }
+    public void canjearPuntos(double puntosNecesarios){
+        puntosCanjeados+=puntosNecesarios;
     }
 
-
+    public void imprimir(){
+        System.out.println("Nombre: " + nombre + " Apellido: " + apellido + " Documento:" + documento.getTipoDoc() + documento.getNumero());
+    }
 }
 
