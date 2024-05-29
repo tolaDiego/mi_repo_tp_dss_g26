@@ -2,6 +2,8 @@ package domain.objetos;
 
 public class SensorTemperatura {
     private double tempMaxima;
+    private  double tempMinima;
+    private  double ultimaTempRegistrada;
 
     public double getTempMaxima() {
         return tempMaxima;
@@ -27,7 +29,6 @@ public class SensorTemperatura {
         this.ultimaTempRegistrada = ultimaTempRegistrada;
     }
 
-    private  double tempMinima;
-    private  double ultimaTempRegistrada;
+
 
 }
