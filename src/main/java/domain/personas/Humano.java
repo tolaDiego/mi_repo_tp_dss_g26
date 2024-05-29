@@ -85,6 +85,8 @@ public class Humano  {
         puntosCanjeados+=puntosNecesarios;
     }
 
-
+    public void imprimir(){
+        System.out.println("Nombre: " + nombre + " Apellido: " + apellido + " Documento:" + documento.getTipoDoc() + documento.getNumero());
+    }
 }
 

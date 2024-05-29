@@ -253,6 +253,7 @@ String errorEliminacion=" error al eliminar";
             ctx.json(response);
         }
     };
+
     private final Handler retornarHumanoPorDoc= ctx->{
         Documento doc=new Documento(
                 TipoDocumento.valueOf(ctx.pathParam("tipoDoc")),
