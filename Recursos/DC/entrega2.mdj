@@ -2041,7 +2041,7 @@
 											"top": 890,
 											"width": 284.16259765625,
 											"height": 13,
-											"text": "+personasQueRetiraron: PersonaVulnerable[0..*]",
+											"text": "+personasQueRetiraron: Vulnerable[0..*]",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3166,7 +3166,7 @@
 											"top": 927,
 											"width": 263,
 											"height": 13,
-											"text": "PersonaVulnerable"
+											"text": "Vulnerable"
 										},
 										{
 											"_type": "LabelView",
@@ -5716,7 +5716,7 @@
 											"top": 787,
 											"width": 198.4248046875,
 											"height": 13,
-											"text": "+personaVul: PersonaVulnerable",
+											"text": "+personaVul: Vulnerable",
 											"horizontalAlignment": 0
 										},
 										{
@@ -20111,7 +20111,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "PersonaVulnerable",
+					"name": "Vulnerable",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
