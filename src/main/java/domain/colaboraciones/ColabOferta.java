@@ -4,12 +4,13 @@ import domain.objetos.Oferta;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.awt.image.BufferedImage;
+import java.util.Date;
+
 @Getter
 @Setter
-public class ColabOferta implements Colaboracion{
+public class ColabOferta {
     private Oferta oferta;
-    @Override
-    public double puntaje() {
-        return 0;
-    }
+    private Date fechaContribucion;
+
 }

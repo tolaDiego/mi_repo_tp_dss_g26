@@ -5,10 +5,9 @@ import domain.accesorios.CamposArchivo;
 import domain.accesorios.Contacto;
 import domain.accesorios.Documento;
 import domain.accesorios.TipoDocumento;
-import domain.colaboraciones.Colaboracion;
-import domain.colaboraciones.DistribucionVianda;
-import domain.colaboraciones.DonacionVianda;
-import domain.colaboraciones.TarjertaRepartida;
+import domain.calculadorPuntos.CalculadorPuntos;
+import domain.colaboraciones.*;
+import domain.objetos.Oferta;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,64 +24,77 @@ public class Humano  {
     private String nombre;
 
     private   String apellido;
-
     private String direccion;
     @JsonFormat(shape =JsonFormat.Shape.STRING,pattern = "dd/mm/yyyy")
     private Date fechaNacimiento;
     private List<Contacto> contactos;
-    private List<Colaboracion> colaboraciones;
-    private double puntosCanjeados;
-    public Humano(){
-        puntosCanjeados=0;
-        this.colaboraciones=new ArrayList<>();
-        this.contactos=new ArrayList<>();
-    }
-    public Humano(CamposArchivo datos){
-        this.colaboraciones=new ArrayList<>();
-        this.contactos=new ArrayList<>();
-        puntosCanjeados=0;
-        this.documento = new Documento(TipoDocumento.valueOf(datos.getTipoDoc()),datos.getDocumento());
+    private List<TarjertaRepartida> tarjertaRepartidas;
+    private List<DistribucionVianda> distribucionViandas;
+    private List<DonacionVianda> donacionViandas;
+    private List<DonacionDinero> donacionDinero;
 
-        this.nombre = datos.getNombre();
-        this.apellido = datos.getApellido();
-        Contacto contacto=new Contacto("MAIL",datos.getMail());
-        this.contactos.add(contacto);
+    private List<Oferta> ofertasCanjeadas;
+    private CalculadorPuntos calculador;
+    public Humano(){
+        this.tarjertaRepartidas=new ArrayList<>();
+        this.distribucionViandas = new ArrayList<>();
+        this.donacionDinero=new ArrayList<>();
+        this.donacionViandas=new ArrayList<>();
+        this.ofertasCanjeadas=new ArrayList<>() ;
+        this.contactos=new ArrayList<>();
+        this.calculador=CalculadorPuntos.getInstanceCalculadorPuntos();
     }
+//    public Humano(CamposArchivo datos){
+//        this.colaboraciones=new ArrayList<>();
+//        this.contactos=new ArrayList<>();
+//        puntosCanjeados=0;
+//        this.documento = new Documento(TipoDocumento.valueOf(datos.getTipoDoc()),datos.getDocumento());
+//
+//        this.nombre = datos.getNombre();
+//        this.apellido = datos.getApellido();
+//        Contacto contacto=new Contacto("MAIL",datos.getMail());
+//        this.contactos.add(contacto);
+//    }
 
     public int cantTarjetasRepartidas(){
-                int cantidad=0;
-        for (Colaboracion colaboracion : colaboraciones) {
-            if(colaboracion instanceof TarjertaRepartida){
-                    cantidad++;
-                }
-        }
-        return cantidad;
+
+        return this.tarjertaRepartidas.size();
+    }
+    public int cantDonacionesDinero(){
+
+        return this.donacionDinero.size();
     }
     public int cantDonacionVianda(){
-        int cantidad=0;
-        for (Colaboracion colaboracion : colaboraciones) {
-            if(colaboracion instanceof DonacionVianda){
-                cantidad++;
-            }
+
+        return this.donacionViandas.size();
+    }
+    public double cantDistribucionVianda(){
+
+        return this.distribucionViandas.stream().mapToDouble(d->d.getCantidadViandas()).sum();
+    }
+
+    public boolean agregarColaboracion(DistribucionVianda contribucion) {
+        return  this.distribucionViandas.add(contribucion);
+    }
+    public boolean agregarColaboracion(TarjertaRepartida colab){
+        return  this.tarjertaRepartidas.add(colab);
+    }
+    public double calcularPuntos() {
+        return calculador.calcularPuntosDe(this)-this.puntosCanjeados();
+    }
+    public boolean canjearPuntos(Oferta oferta){
+        if(oferta.tieneLosPuntosRequeridos(this)){
+            this.ofertasCanjeadas.add(oferta);
+            return   true;
         }
-        return cantidad;
+        return false;
+
     }
-    public int cantDistribucionVianda(){
-        int cantidad=0;
-        for (Colaboracion colaboracion : colaboraciones) {
-            if(colaboracion instanceof DistribucionVianda)
-                cantidad += ((DistribucionVianda) colaboracion).getCantidadViandas();
-        }
-        return cantidad;
+    public  double puntosCanjeados(){
+        return this.ofertasCanjeadas.stream().mapToDouble(oferta->oferta.getPuntosNecesarios()).sum();
     }
-    public boolean agregarColaboracion(Colaboracion colab){
-        return  this.colaboraciones.add(colab);
-    }
-    public double puntaje() {
-        return  colaboraciones.stream().mapToDouble(colab->colab.puntaje()).sum()-puntosCanjeados;
-    }
-    public void canjearPuntos(double puntosNecesarios){
-        puntosCanjeados+=puntosNecesarios;
+    public double pesosDonados(){
+        return  this.donacionDinero.stream().mapToDouble(donacion->donacion.getMonto()).sum();
     }
 
     public void imprimir(){

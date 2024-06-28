@@ -5,18 +5,16 @@ import domain.personas.Vulnerable;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
-public class TarjertaRepartida implements   Colaboracion{
+public class TarjertaRepartida {
     private Tarjeta tarjeta;
-   private double coefPorTarjeta;
     private Vulnerable personaTitular;
+    private Date fechaContribucion;
    public TarjertaRepartida(){
-       this.coefPorTarjeta=2;
 
    }
-   @Override
-   public double puntaje(){
-       return coefPorTarjeta;
-   }
+
 }

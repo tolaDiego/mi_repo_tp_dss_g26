@@ -41,7 +41,8 @@ public class CSVLector {
         String cantidad = datos[7];
 
         CamposArchivo create = new CamposArchivo(tipoDoc,doc,nombre,apellido,mail,fechaColabo,formaColabo,cantidad);
-        Humano persona = new Humano(create);
+        //Humano persona = new Humano(create);
+        Humano persona  =new Humano();
         personas.add(persona);
       }
     } catch (IOException e) {

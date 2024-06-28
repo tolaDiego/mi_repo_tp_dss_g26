@@ -11,16 +11,15 @@ import java.util.Calendar;
 import java.util.Date;
 @Getter
 @Setter
-public class DonacionDinero implements Colaboracion {
+public class DonacionDinero{
     @JsonFormat(shape =JsonFormat.Shape.STRING,pattern = "dd/mm/yyyy")
     public Date fechaDonacion;
     public double monto;
     public  String frecuencia;//por dia,mensual,anual, quincenal,etc
-    private double coefPorDinero;
+
     private  boolean puntosUsados;
     public DonacionDinero(){
 
-        this.coefPorDinero=0.5;
     }
     public DonacionDinero(CamposArchivo campos){
         SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
@@ -29,12 +28,8 @@ public class DonacionDinero implements Colaboracion {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        this.monto=1;
-        this.coefPorDinero=0.5;
+
     }
 
-    @Override
-    public double puntaje() {
-        return coefPorDinero*monto;
-    }
+
 }
