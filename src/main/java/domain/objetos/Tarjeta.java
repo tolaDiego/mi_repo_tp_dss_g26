@@ -19,8 +19,11 @@ public class Tarjeta {
 
     public Tarjeta(){}
 
-    public void agregarApertura(Apertura nuevaApertura){
-        aperturas.add(nuevaApertura);
+    public void agregarApertura(Apertura nuevaApertura)
+    {
+        if(this.aperturasRestantes() > 0 ){
+            aperturas.add(nuevaApertura);
+        }
     }
 
     public int aperturasRestantes(){
