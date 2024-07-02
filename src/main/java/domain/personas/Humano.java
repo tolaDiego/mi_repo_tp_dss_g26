@@ -7,6 +7,8 @@ import domain.accesorios.Documento;
 import domain.accesorios.TipoDocumento;
 import domain.calculadorPuntos.CalculadorPuntos;
 import domain.colaboraciones.*;
+import domain.incidentes.FallaTecnica;
+import domain.objetos.Heladera;
 import domain.objetos.Oferta;
 import lombok.Getter;
 import lombok.Setter;
@@ -71,6 +73,11 @@ public class Humano  {
     public double cantDistribucionVianda(){
 
         return this.distribucionViandas.stream().mapToDouble(d->d.getCantidadViandas()).sum();
+    }
+
+    public void reportarFallaTecnica(Heladera heladera,String descripcion){
+        FallaTecnica falla = new FallaTecnica(heladera,this, descripcion);
+        falla.reportar();
     }
 
     public boolean agregarColaboracion(DistribucionVianda contribucion) {
