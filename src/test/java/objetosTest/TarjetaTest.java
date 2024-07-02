@@ -3,7 +3,7 @@ package objetosTest;
 import java.util.Calendar;
 import domain.accesorios.Apertura;
 import domain.objetos.Heladera;
-import domain.objetos.Tarjeta;
+import domain.objetos.TarjetaVulnerable;
 import domain.personas.Vulnerable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +14,7 @@ import java.util.Calendar;
 public class TarjetaTest {
     private Apertura apertura1,apertura2,apertura3;
     private Heladera heladera1;
-    private Tarjeta tarjeta1;
+    private TarjetaVulnerable tarjeta1;
     private Vulnerable vulnerable;
 
     void setUp() {
@@ -22,7 +22,7 @@ public class TarjetaTest {
         apertura2 = new Apertura();
         apertura3 = new Apertura();
         heladera1 = new Heladera();
-        tarjeta1 = new Tarjeta();
+        tarjeta1 = new TarjetaVulnerable();
         vulnerable = new Vulnerable();
 
         Calendar calendar = Calendar.getInstance();

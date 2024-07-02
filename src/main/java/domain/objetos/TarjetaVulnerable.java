@@ -10,14 +10,14 @@ import java.util.Date;
 import java.util.List;
 @Setter
 @Getter
-public class Tarjeta {
+public class TarjetaVulnerable {
     private int cantidadDeUsosDelDia;
     private long codigoTarjeta;
     private Vulnerable personaVul;
 
     private List<Apertura> aperturas;
 
-    public Tarjeta(){}
+    public TarjetaVulnerable(){}
 
     public void agregarApertura(Apertura nuevaApertura)
     {
