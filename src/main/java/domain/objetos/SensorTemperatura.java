@@ -4,7 +4,7 @@ import domain.incidentes.AlertaFraude;
 import domain.incidentes.AlertaTemperatura;
 import domain.incidentes.Incidente;
 
-public class SensorTemperatura {
+public class SensorTemperatura implements Sensor {
     private double tempMaxima;
     private  double tempMinima;
     private  double ultimaTempRegistrada;
