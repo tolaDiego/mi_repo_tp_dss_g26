@@ -2,10 +2,7 @@ package main;
 
 
 
-import adapters.notificadores.AdapterMedioNotifMailSender;
-import adapters.notificadores.AdapterMedioNotificacion;
-import adapters.notificadores.AdapterMedioNotifwhatsapp;
-import adapters.notificadores.Mensaje;
+import adapters.notificadores.*;
 import adapters.recomendadorUbicaciones.AdapterRecomendadorRetrofit;
 import domain.accesorios.Contacto;
 import domain.accesorios.PuntoUbicacion;
@@ -39,6 +36,9 @@ public class App {
         contacto.setContacto("1125572659");
         AdapterMedioNotificacion wp=new AdapterMedioNotifwhatsapp();
         wp.notificar(contacto,mensaje);
+        //telegram
+        AdapterMedioNotifTelegram telegram=new AdapterMedioNotifTelegram();
+
 
         CalculadorPuntos calculadorPuntos=CalculadorPuntos.getInstanceCalculadorPuntos();
         System.out.println("aaaa"+calculadorPuntos.getCoefPorDinero() );
