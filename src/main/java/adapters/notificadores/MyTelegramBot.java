@@ -5,17 +5,26 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.util.Map;
+
 public class MyTelegramBot extends TelegramLongPollingBot {
+    private static MyTelegramBot instanciaBot=null;
+    private final String botToken;
 
-    private String botToken;
-
-    public MyTelegramBot(String botToken) {
-        this.botToken = botToken;
+    private MyTelegramBot() {
+        this.botToken ="6830980434:AAGV8IASlyv8g36voT2daYYLDAOWSM3w5vE";
     }
 
     @Override
     public String getBotToken() {
         return botToken;
+    }
+    public static MyTelegramBot getInstanciaBot(){
+
+        if(instanciaBot==null){
+            instanciaBot=new MyTelegramBot();
+        }
+        return instanciaBot;
     }
 
     @Override

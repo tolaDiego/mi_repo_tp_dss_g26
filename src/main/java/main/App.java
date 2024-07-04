@@ -19,24 +19,28 @@ public class App {
 //        new PersonasController().registrarRutas(app);
 //        System.out.println("sistema ejecutando");
 
-
-        // prueba consumo de api recomendador de ubicaciones(necesita postman).
-        AdapterRecomendadorRetrofit recomendador= AdapterRecomendadorRetrofit.getInstanciaRecomendador();
-        System.out.println(recomendador.getUrl());
-        PuntoUbicacion punto=new PuntoUbicacion(-34.616747665,-58.4396);
-       List<PuntoUbicacion> lista=recomendador.recomendarUbicaciones(punto,12);
-
-       //prueba envio de emails
-        Contacto contacto=new Contacto("mail","dddjtola@gmail.com");
+//
+//        // prueba consumo de api recomendador de ubicaciones(necesita postman).
+//        AdapterRecomendadorRetrofit recomendador= AdapterRecomendadorRetrofit.getInstanciaRecomendador();
+//        System.out.println(recomendador.getUrl());
+//        PuntoUbicacion punto=new PuntoUbicacion(-34.616747665,-58.4396);
+//       List<PuntoUbicacion> lista=recomendador.recomendarUbicaciones(punto,12);
+//
+//       //prueba envio de emails
+//        Contacto contacto=new Contacto("mail","dddjtola@gmail.com");
+//        Mensaje mensaje=new Mensaje("un mensaje para MI",null);
+//        AdapterMedioNotifMailSender mailSender=new AdapterMedioNotifMailSender();
+//        mailSender.notificar(contacto,mensaje);
+//        System.out.println("mail enviado");
+//        //prueba wp
+//        contacto.setContacto("1125572659");
+//        AdapterMedioNotificacion wp=new AdapterMedioNotifwhatsapp();
+//        wp.notificar(contacto,mensaje);
+        //telegram
+        Contacto contacto=new Contacto("mail","5118817082");
         Mensaje mensaje=new Mensaje("un mensaje para MI",null);
-        AdapterMedioNotifMailSender mailSender=new AdapterMedioNotifMailSender();
-        mailSender.notificar(contacto,mensaje);
-        System.out.println("mail enviado");
-        //prueba wp
-        contacto.setContacto("1125572659");
-        AdapterMedioNotificacion wp=new AdapterMedioNotifwhatsapp();
-        wp.notificar(contacto,mensaje);
-
+        AdapterMedioNotificacion telegram=new AdapterMedioNotifTelegram();
+        telegram.notificar(contacto,mensaje);
 
 
         CalculadorPuntos calculadorPuntos=CalculadorPuntos.getInstanceCalculadorPuntos();
