@@ -36,8 +36,7 @@ public class App {
         contacto.setContacto("1125572659");
         AdapterMedioNotificacion wp=new AdapterMedioNotifwhatsapp();
         wp.notificar(contacto,mensaje);
-        //telegram
-        AdapterMedioNotifTelegram telegram=new AdapterMedioNotifTelegram();
+
 
 
         CalculadorPuntos calculadorPuntos=CalculadorPuntos.getInstanceCalculadorPuntos();
