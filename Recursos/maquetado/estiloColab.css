@@ -1,0 +1,39 @@
+.alinearIzquierda{
+    text-align: left; 
+    border: 1px solid #060606;
+    background-color: #ffffff !important;
+    border-radius: 10px;   
+}
+
+.fondoGris {
+    background-color: #4a1bf5 !important;
+    border-radius: 10px;
+    height: 50;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.formulario {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container-fluid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
