@@ -8,10 +8,12 @@
 .fondoGris {
     background-color: #4a1bf5 !important;
     border-radius: 10px;
-    height: 50;
+    height: 100;
+    width: 500px;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
 }
 
 .formulario {
@@ -36,4 +38,5 @@ body, html {
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
+    background-color: #2e84f5 !important;
 }
