@@ -1,0 +1,247 @@
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    margin:15px;
+    font-family: 'Arial', sans-serif;
+
+}
+
+/* Paleta de colores */
+:root {
+    --modern-warm-primary: rgba(116, 190, 232, 0.91); /* Azul celeste */
+    --modern-warm-primary-active: rgba(0, 123, 167, 0.91); /* Azul más oscuro */
+    --modern-warm-secondary: #FFD700; /* Amarillo dorado */
+    --modern-warm-accent: #FDFEFE; /* Blanco */
+    --modern-warm-light: rgba(203, 237, 248, 0.93); /* Celeste muy claro */
+    --modern-warm-dark: #0056A3; /* Azul oscuro */
+    --modern-red-dark: #7D2C1F; /* Puedes mantener este o adaptarlo si es necesario */
+}
+
+/* Encabezado */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    background-color: var(--modern-warm-primary);
+    height: 13vh;
+    font-size: 1.2em;
+    margin-bottom: 1em;
+
+}
+.navbar {
+    text-align: center;
+}
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    row-gap: 1px;
+}
+.logo-img {
+    height: 100%;
+    width: auto;
+
+}
+
+.navbar-ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+    column-gap: 50px;
+
+    padding-right: 40px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+
+
+}
+.nav-link:hover {
+   color: var(--modern-warm-accent);
+}
+
+.navbar>a{
+    align-content: center;
+}
+
+.cta-button {
+    background-color: var(--modern-warm-secondary);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5em;
+    text-decoration: none;
+    font-weight: bold;
+
+}
+
+/* Sección de Héroe */
+.hero {
+    background-image: url('../persona-colaborando.webp');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 10% 20px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+}
+
+.hero-content {
+    max-width: 800px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero h1 {
+    font-size: 3em;
+}
+
+.hero p {
+    font-size: 1.5em;
+    margin: 20px 0;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.cta-main{
+    background-color: #E76F51;
+    padding: 20px 20px;
+    border-radius:  5em;;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+.cta-main:hover{
+    background-color: var(--modern-red-dark);
+}
+
+.cta-secondary {
+    background-color: transparent;
+    border: 2px solid white;
+
+}
+
+/* Sección de Impacto */
+.impact {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #F4A261;
+    color: white;
+}
+
+.impact h2 {
+    font-size: 2.5em;
+}
+
+.impact p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+}
+
+.impact-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+
+}
+
+.stat-card {
+    background-color: white;
+    color: #7D2C1F;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h3 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.more-info {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #E76F51;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Sección del Mapa */
+.mapa {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.mapa h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.mapa p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 500px;
+    background-color: #F4A261;
+
+    display: flex;
+    justify-content: center;
+
+
+}
+#map { height: 500px; width: 60%}
+
+.map-placeholder,.impact,.hero{
+    border-radius: 10px;
+}
+/* Footer */
+footer {
+    background-color: #7D2C1F;
+    color: white;
+    padding: 40px 20px;
+    margin-top: .3em;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.footer-content h3 {
+    margin-bottom: 20px;
+}
+
+.footer-content p, .footer-content ul, .footer-content ul li a {
+    color: white;
+}
+
+.quick-links ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.quick-links ul li {
+    margin-bottom: 10px;
+}
+

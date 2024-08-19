@@ -1,0 +1,88 @@
+/* Normalización básica */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales del cuerpo */
+body {
+    font-family: Arial, sans-serif;
+
+    color: #4e342e; /* Color de texto oscuro pero cálido */
+}
+
+/* Contenedor principal de la página de inicio de sesión */
+#login-page-content {
+    align-content: center;
+    height: 500px;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: var(--modern-warm-light);
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos del encabezado de la página de inicio de sesión */
+.login-header .login-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--modern-warm-primary-active);
+}
+
+.login-header .login-subtitle {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #8d6e63; /* Color cálido y suave */
+}
+
+/* Estilos del formulario de inicio de sesión */
+.login-form .login-form-group {
+    margin-bottom: 15px;
+}
+
+.login-form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #6d4c41; /* Color cálido */
+}
+
+.login-form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d7ccc8;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.login-submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--modern-warm-primary-active);
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-submit-button:hover {
+    background-color: var(--modern-warm-secondary);
+}
+
+.login-forgot-password-link {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #d84315; /* Color cálido */
+    text-decoration: none;
+}
+
+.login-forgot-password-link:hover {
+    text-decoration: underline;
+}

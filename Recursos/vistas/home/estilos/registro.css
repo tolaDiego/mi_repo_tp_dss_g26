@@ -1,0 +1,117 @@
+
+/* Fondo con ondas para un efecto más orgánico */
+.wave-background {
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    min-height: 65vh;
+
+    background: linear-gradient(135deg, #74ACDF 25%, #ffffff 60%, rgba(243, 201, 33, 0.95) 90%);
+
+
+    opacity: .85;
+
+}
+
+.wave-background h1 {
+    color: var(--modern-warm-dark);
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+/* Page Content Container */
+#page-content {
+    background-color: var(--modern-warm-light);
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 500px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Header Styles */
+.header-form-registro-colaborador .title {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.header-form-registro-colaborador .subtitle {
+    color: #7f8c8d;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+/* Form Styles */
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.contact-group,
+.optional-info {
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.contact-group legend,
+.optional-info legend {
+    font-weight: bold;
+    color: #34495e;
+    margin-bottom: 10px;
+}
+
+.form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #34495e;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    border-color: var(--modern-warm-accent);
+    outline: none;
+
+}
+
+.submit-button {
+    background-color: var(--modern-warm-primary-active);
+    color: var(--modern-warm-accent);
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: var(--modern-warm-secondary);
+}

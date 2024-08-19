@@ -1,0 +1,180 @@
+
+/* Normalización básica */
+.modern-body,
+.modern-body * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Paleta de colores cálidos */
+:root {
+    --warm-primary: #FF6F61;  /* Rojo cálido */
+    --warm-secondary: #FFA07A;  /* Coral */
+    --warm-accent: #FFB6C1;  /* Rosa claro */
+    --warm-light: #FFF0E0;  /* Crema */
+    --warm-dark: #c75311;  /* Marrón oscuro */
+}
+
+/* Estilos del header y la barra de navegación */
+.header {
+    background-color: var(--warm-primary);
+    padding: 15px 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: 50px; /* Ajusta el tamaño del logo según lo necesites */
+    height: auto;
+    margin-right: 10px;
+}
+
+.logo-text {
+    color: #ffffff;
+    font-size: 1.8em;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Arial', sans-serif;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background-color: var(--warm-secondary);
+    transform: translateY(-3px);
+}
+
+/* Estilos del menú desplegable */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--warm-light);
+    padding: 10px 0;
+    border-radius: 10px;
+    list-style: none;
+    min-width: 180px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-link {
+    color: var(--warm-dark);
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-link:hover {
+    background-color: var(--warm-accent);
+    border-radius: 10px;
+}
+
+/* Mostrar el menú al pasar el mouse sobre la opción "Mi Cuenta" */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Estilos del contenido principal */
+.content {
+    padding: 40px;
+    font-family: 'Arial', sans-serif;
+    color: var(--warm-dark);
+    background-color: var(--warm-light);
+    min-height: 100vh;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+p {
+    line-height: 1.8;
+    font-size: 1.2em;
+}
+
+/* Estilos del Footer */
+.footer {
+    background-color: var(--warm-dark);
+    color: var(--warm-light);
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    flex: 1;
+    padding: 10px;
+    min-width: 250px;
+}
+
+.footer-section h2 {
+    color: var(--warm-accent);
+    margin-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: var(--warm-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: var(--warm-accent);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid
+}
