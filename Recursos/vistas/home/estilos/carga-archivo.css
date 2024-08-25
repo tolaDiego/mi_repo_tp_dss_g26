@@ -1,0 +1,22 @@
+
+/* Estilos del formulario */
+.csv-upload-form {
+
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--modern-warm-primary-active);
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin-top: 30px;
+    border:  solid;
+}
+
+
+
+.upload-button:hover {
+    background-color: var(--modern-warm-secondary);
+}
+
+
+

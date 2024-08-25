@@ -1,0 +1,43 @@
+
+
+ table,th, td {
+
+    padding: 12px;
+    color: white;
+     border:2px  solid  rgba(161, 175, 183, 0.98) ;
+ }
+ table {
+     width: 100%;
+     border-collapse: collapse;
+     margin: 20px 0;
+     background-color: rgba(34, 86, 114, 0.51);
+     text-align: left;
+ }
+
+th {
+    background-color: rgba(5, 70, 103, 0.82);
+    text-align: left;
+    color: #fafafa;
+}
+
+
+.details {
+    display: none;
+    padding: 10px;
+    margin-top: 5px;
+    text-align: left;
+}
+
+.details dt {
+    font-weight: bold;
+}
+
+.toggle-details {
+    cursor: pointer;
+    color: #f5f117;
+    text-decoration: underline;
+
+}
+
+
+
