@@ -396,7 +396,7 @@ function vistaDistribuirVianda() {
 <div class="wave-background">
   <div class="DistribuirVianda-container" >
     <div class="DistribuirVianda-header">
-      <h1>Donar vianda</h1>
+      <h1>Distribuir vianda</h1>
     </div>
 
     <div class="DistribuirVianda-card">
@@ -422,6 +422,39 @@ function vistaDistribuirVianda() {
 document.getElementById("DistribuirVianda-drop").addEventListener("click", (evento_click) => {
     document.getElementById("main").innerHTML = "";
     document.getElementById("main").innerHTML = vistaDistribuirVianda()
+})
+
+function vistaEntregarTarjeta() {
+  return `
+<div class="wave-background">
+<div class="entregarTarjeta-container" >
+  <div class="entregarTarjeta-header">
+    <h1>Entregar Tarjeta</h1>
+  </div>
+<form class="login-form">
+  <div class="entregarTarjeta-card">
+    <div class="entregarTarjeta-section">
+      <label for="entregarTarjeta" class="entregarTarjeta-label">Colaborador:</label>
+      <input type="text" id="entregarTarjeta" name="entregarTarjeta" class="entregarTarjeta-input" placeholder="Nombre" required>
+    </div>
+    <div class="entregarTarjeta-section">
+      <label for="entregarTarjeta" class="entregarTarjeta-label">Persona Vulnerable:</label>
+      <input type="text" id="entregarTarjeta" name="entregarTarjeta" class="entregarTarjeta-input" placeholder="Nombre" required>
+    </div>
+    <div class="entregarTarjeta-section">
+      <label for="entregarTarjeta" class="entregarTarjeta-label">Fecha de Donacion:</label>
+      <input type="datetime-local" id="entregarTarjeta" name="entregarTarjeta" class="entregarTarjeta-input" placeholder="Fecha de Donacion" required>
+    </div>
+    <button type="submit" class="submit-button">Donar</button>
+  </div>
+  </form>
+</div>
+</div>
+   `
+}
+document.getElementById("entregarTarjeta-drop").addEventListener("click", (evento_click) => {
+  document.getElementById("main").innerHTML = "";
+  document.getElementById("main").innerHTML = vistaEntregarTarjeta()
 })
 
 
