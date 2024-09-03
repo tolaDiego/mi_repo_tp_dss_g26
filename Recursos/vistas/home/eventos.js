@@ -458,5 +458,50 @@ document.getElementById("entregarTarjeta-drop").addEventListener("click", (event
 })
 
 
+function cargarPersonaVulnerable() {
+  return `
+<div class="wave-background">
+<div class="cargar-vulnerble-container" >
+  <div class="cargar-vulnerble-header">
+    <h1>Cargar Persona Vulnerable</h1>
+  </div>
+<form class="login-form">
+  <div class="cargar-vulnerble-card">
+    <div class="cargar-vulnerble-section">
+      <label for="cargar-vulnerble" class="cargar-vulnerble-label">Nombre:</label>
+      <input type="text" id="cargar-vulnerble" name="cargar-vulnerble" class="cargar-vulnerble-input" placeholder="Nombre" required>
+    </div>
+    <div class="cargar-vulnerble-section">
+      <label for="cargar-vulnerble" class="cargar-vulnerble-label">Apellido:</label>
+      <input type="text" id="cargar-vulnerble" name="cargar-vulnerble" class="cargar-vulnerble-input" placeholder="Apellido" required>
+    </div>
+    <div class="cargar-vulnerble-section">
+      <label for="cargar-vulnerble" class="cargar-vulnerble-label">Personas a cargo:</label>
+      <input type="text" id="cargar-vulnerble" name="cargar-vulnerble" class="cargar-vulnerble-input" placeholder="Numero" required>
+    </div>
+    <div class="cargar-vulnerble-section">
+      <label for="cargar-vulnerble" class="cargar-vulnerble-label">Direccion:</label>
+      <input type="text" id="cargar-vulnerble" name="cargar-vulnerble" class="cargar-vulnerble-input" placeholder="Direccion" required>
+    </div>
+    <div class="cargar-vulnerble-section">
+      <label for="cargar-vulnerble" class="cargar-vulnerble-label">Documento:</label>
+      <input type="text" id="cargar-vulnerble" name="cargar-vulnerble" class="cargar-vulnerble-input" placeholder="Documento" required>
+    </div>
+    <div class="cargar-vulnerble-section">
+      <label for="cargar-vulnerble" class="cargar-vulnerble-label">Fecha de Donacion:</label>
+      <input type="datetime-local" id="cargar-vulnerble" name="cargar-vulnerble" class="cargar-vulnerble-input" placeholder="Fecha de Nacimiento" required>
+    </div>
+    <button type="submit" class="submit-button">Registrar</button>
+  </div>
+  </form>
+</div>
+</div>
+   `
+}
+document.getElementById("boton-cargar-vulnerble").addEventListener("click", (evento_click) => {
+  document.getElementById("main").innerHTML = "";
+  document.getElementById("main").innerHTML = cargarPersonaVulnerable()
+})
+
 
 
