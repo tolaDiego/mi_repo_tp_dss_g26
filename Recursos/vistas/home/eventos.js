@@ -312,6 +312,151 @@ document.getElementById("boton-tabla-heladera").addEventListener("click", (event
     });
 });
 
+function vistaDonarDinero() {
+    return `
+<div class="wave-background">
+  <div class="DonarDinero-container" >
+    <div class="DonarDinero-header">
+      <h1>Donar dinero</h1>
+    </div>
+
+    <div class="DonarDinero-card">
+      <div class="DonarDinero-section">
+        <label for="DonarDinero" class="DonarDinero-label">Donar Dinero:</label>
+        <input type="text" id="DonarDinero" name="DonarDinero" class="DonarDinero-input" placeholder="Importe" required>
+      </div>
+      <div class="DonarDinero-section">
+        <label for="DonarDinero" class="DonarDinero-label">Fecha:</label>
+        <input type="text" id="DonarDinero" name="DonarDinero" class="DonarDinero-input" placeholder="Fecha de donacion" required>
+      </div>
+
+      <button type="submit" class="submit-button">Donar</button>
+    </div>
+  </div>
+</div>
+     `
+}
+document.getElementById("donar-dinero-drop").addEventListener("click", (evento_click) => {
+    document.getElementById("main").innerHTML = "";
+    document.getElementById("main").innerHTML = vistaDonarDinero()
+})
+
+function vistaDonarVianda() {
+    return `
+<div class="wave-background">
+  <div class="donar-vianda-container" >
+    <div class="donar-vianda-header">
+      <h1>Donar vianda</h1>
+    </div>
+
+    <div class="donar-vianda-card">
+      <div class="donar-vianda-section">
+        <label for="donar-vianda" class="donar-vianda-label">tipo:</label>
+        <input type="text" id="donar-vianda" name="donar-vianda" class="donar-vianda-input" placeholder="Comida" required>
+      </div>
+      <div class="donar-vianda-section">
+        <label for="donar-vianda" class="donar-vianda-label">Fecha de Caducidad:</label>
+        <input type="datetime-local" id="donar-vianda" name="donar-vianda" class="donar-vianda-input" placeholder="Fecha de Caducidad" required>
+      </div>
+      <div class="donar-vianda-section">
+        <label for="donar-vianda" class="donar-vianda-label">Fecha de Donacion:</label>
+        <input type="datetime-local" id="donar-vianda" name="donar-vianda" class="donar-vianda-input" placeholder="Fecha de Donacion" required>
+      </div>
+      <div class="donar-vianda-section">
+        <label for="donar-vianda" class="donar-vianda-label">Colaborador:</label>
+        <input type="text" id="donar-vianda" name="donar-vianda" class="donar-vianda-input" placeholder="Nombre de Colaborador" required>
+      </div>
+      <div class="donar-vianda-section">
+        <label for="donar-vianda" class="donar-vianda-label">Heladera:</label>
+        <input type="text" id="donar-vianda" name="donar-vianda" class="donar-vianda-input" placeholder="Nombre de heladera" required>
+      </div>
+      <div class="donar-vianda-section">
+        <label for="donar-vianda" class="donar-vianda-label">Calorias:</label>
+        <input type="text" id="donar-vianda" name="donar-vianda" class="donar-vianda-input" placeholder="Calorias" required>
+      </div>
+      <div class="donar-vianda-section">
+        <label for="donar-vianda" class="donar-vianda-label">Peso:</label>
+        <input type="text" id="donar-vianda" name="donar-vianda" class="donar-vianda-input" placeholder="Peso" required>
+      </div>
+
+      <button type="submit" class="submit-button">Donar</button>
+    </div>
+  </div>
+</div>
+     `
+}
+document.getElementById("donar-vianda-drop").addEventListener("click", (evento_click) => {
+    document.getElementById("main").innerHTML = "";
+    document.getElementById("main").innerHTML = vistaDonarVianda()
+})
+
+
+function vistaDistribuirVianda() {
+    return `
+<div class="wave-background">
+  <div class="DistribuirVianda-container" >
+    <div class="DistribuirVianda-header">
+      <h1>Distribuir vianda</h1>
+    </div>
+
+    <div class="DistribuirVianda-card">
+      <div class="DistribuirVianda-section">
+        <label for="DistribuirVianda" class="DistribuirVianda-label">Heladera inicial:</label>
+        <input type="text" id="DistribuirVianda" name="DistribuirVianda" class="DistribuirVianda-input" placeholder="Heladera" required>
+      </div>
+      <div class="DistribuirVianda-section">
+        <label for="DistribuirVianda" class="DistribuirVianda-label">Heladera final:</label>
+        <input type="text" id="DistribuirVianda" name="DistribuirVianda" class="DistribuirVianda-input" placeholder="Heladera" required>
+      </div>
+      <div class="DistribuirVianda-section">
+        <label for="DistribuirVianda" class="DistribuirVianda-label">Fecha de Donacion:</label>
+        <input type="datetime-local" id="DistribuirVianda" name="DistribuirVianda" class="DistribuirVianda-input" placeholder="Fecha de Donacion" required>
+      </div>
+
+      <button type="submit" class="submit-button">Donar</button>
+    </div>
+  </div>
+</div>
+     `
+}
+document.getElementById("DistribuirVianda-drop").addEventListener("click", (evento_click) => {
+    document.getElementById("main").innerHTML = "";
+    document.getElementById("main").innerHTML = vistaDistribuirVianda()
+})
+
+function vistaEntregarTarjeta() {
+  return `
+<div class="wave-background">
+<div class="entregarTarjeta-container" >
+  <div class="entregarTarjeta-header">
+    <h1>Entregar Tarjeta</h1>
+  </div>
+<form class="login-form">
+  <div class="entregarTarjeta-card">
+    <div class="entregarTarjeta-section">
+      <label for="entregarTarjeta" class="entregarTarjeta-label">Colaborador:</label>
+      <input type="text" id="entregarTarjeta" name="entregarTarjeta" class="entregarTarjeta-input" placeholder="Nombre" required>
+    </div>
+    <div class="entregarTarjeta-section">
+      <label for="entregarTarjeta" class="entregarTarjeta-label">Persona Vulnerable:</label>
+      <input type="text" id="entregarTarjeta" name="entregarTarjeta" class="entregarTarjeta-input" placeholder="Nombre" required>
+    </div>
+    <div class="entregarTarjeta-section">
+      <label for="entregarTarjeta" class="entregarTarjeta-label">Fecha de Donacion:</label>
+      <input type="datetime-local" id="entregarTarjeta" name="entregarTarjeta" class="entregarTarjeta-input" placeholder="Fecha de Donacion" required>
+    </div>
+    <button type="submit" class="submit-button">Donar</button>
+  </div>
+  </form>
+</div>
+</div>
+   `
+}
+document.getElementById("entregarTarjeta-drop").addEventListener("click", (evento_click) => {
+  document.getElementById("main").innerHTML = "";
+  document.getElementById("main").innerHTML = vistaEntregarTarjeta()
+})
+
 
 
 

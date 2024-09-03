@@ -1,0 +1,75 @@
+
+
+/* Contenedor de reporte */
+.donar-viandas-container {
+    background-color: rgba(255, 255, 255, 0.85); /* Fondo blanco semitransparente para resaltar contenido */
+    padding: 40px;
+    max-width: 900px;
+    margin: 40px auto;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Estilo de la cabecera */
+.donar-viandas-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.donar-viandas-header h1 {
+    color: var(--modern-warm-dark);
+    font-size: 2.2em;
+    font-weight: bold;
+}
+
+/* Estilo de la tarjeta de reporte */
+.donar-viandas-card {
+    background-color: var(--modern-warm-light);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.donar-viandas-section {
+    margin-bottom: 20px;
+}
+
+.donar-viandas-label {
+    font-weight: bold;
+    color: var(--modern-warm-dark);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.donar-viandas-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--modern-warm-primary);
+    border-radius: 10px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.donar-viandas-input:focus {
+    border-color: var(--modern-warm-secondary);
+    outline: none;
+}
+
+.submit-button {
+
+    padding: 15px 25px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+    background-color: var(--modern-warm-secondary);
+    transform: translateY(-3px);
+}
+
