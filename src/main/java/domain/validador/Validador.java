@@ -1,6 +1,7 @@
 package domain.validador;
 
 import domain.validador.validaciones.Validacion;
+
 import java.util.ArrayList;
 import java.util.List;
 

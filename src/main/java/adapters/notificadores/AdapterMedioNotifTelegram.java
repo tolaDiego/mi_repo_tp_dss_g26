@@ -1,14 +1,10 @@
 package adapters.notificadores;
 
-import adapters.notificadores.AdapterMedioNotificacion;
-import adapters.notificadores.Mensaje;
 import domain.accesorios.Contacto;
 import lombok.Getter;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-
-import java.util.List;
 
 @Getter
 public class AdapterMedioNotifTelegram implements AdapterMedioNotificacion {

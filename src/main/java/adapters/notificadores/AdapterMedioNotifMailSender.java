@@ -1,7 +1,5 @@
 package adapters.notificadores;
 
-import adapters.notificadores.AdapterMedioNotificacion;
-import adapters.notificadores.Mensaje;
 import com.resend.Resend;
 import com.resend.core.exception.ResendException;
 import com.resend.services.emails.model.CreateEmailOptions;

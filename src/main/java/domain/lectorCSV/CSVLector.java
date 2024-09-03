@@ -2,11 +2,11 @@ package domain.lectorCSV;
 
 import domain.accesorios.CamposArchivo;
 import domain.personas.Humano;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CSVLector {

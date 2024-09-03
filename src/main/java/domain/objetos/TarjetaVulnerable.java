@@ -5,34 +5,43 @@ import domain.personas.Vulnerable;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 @Setter
 @Getter
 public class TarjetaVulnerable {
-    private int cantidadDeUsosDelDia;
-    private long codigoTarjeta;
+    private List<Apertura> aperturas;
     private Vulnerable personaVul;
 
-    private List<Apertura> aperturas;
-
-    public TarjetaVulnerable(){
-        this.aperturas=new ArrayList<>();
+    public TarjetaVulnerable() {
+        this.aperturas = new ArrayList<>();
     }
-    public void agregarApertura(Apertura nuevaApertura)
-    {
-        if(this.aperturasRestantes() > 0 ){
+
+    public void agregarApertura(Apertura nuevaApertura) {
+        if (this.aperturasRestantes() > 0) {
             aperturas.add(nuevaApertura);
         }
     }
 
-    public int aperturasRestantes(){
-        Calendar fechaActual = Calendar.getInstance();
+    public int aperturasRestantes() {
+        Date fechaActual = new Date();
 
-        List<Apertura> aperturasdeHoy = aperturas.stream().filter(a->a.getFechaDeUso() == fechaActual).toList() ;
+        // Filtrar aperturas del día actual
+        List<Apertura> aperturasDeHoy = aperturas.stream()
+                .filter(a -> esMismaFecha(a.getFechaDeUso(), fechaActual))
+                .toList();
 
-        return Math.max((int) (4 + personaVul.getMenoresACargo()*2 - (long) aperturasdeHoy.size()), 0);
+        // Calcular aperturas restantes
+        int maxAperturasPermitidas = 4 + personaVul.getMenoresACargo() * 2;
+        return Math.max(maxAperturasPermitidas - aperturasDeHoy.size(), 0);
+    }
+
+    private boolean esMismaFecha(Date fecha1, Date fecha2) {
+        // Comparar solo año, mes y día
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        return sdf.format(fecha1).equals(sdf.format(fecha2));
     }
 
 }
