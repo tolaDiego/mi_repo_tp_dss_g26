@@ -7,7 +7,7 @@ import domain.personas.Humano;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepoHumano {
+public class RepoHumano implements  IRepoHumano {
         private final List<Humano> humanos = new ArrayList<>();
 
         public boolean agregarHumano(Humano humano) {
@@ -37,7 +37,6 @@ public class RepoHumano {
                 orElse(null);
     }
 
-
     public Humano actualizarHumano(Humano nuevo) {
 
        Humano humano=    retornarHumanoPorDoc(nuevo.getDocumento());
@@ -49,5 +48,9 @@ public class RepoHumano {
        return humano;
         }
 
+    @Override
+    public List<Humano> getAll() {
+        return null;
+    }
 }
 

@@ -14,9 +14,7 @@ public class Vulnerable {
     private int id;
     public  boolean estaEnSituacionDeCalle;
     public int menoresACargo;
-    @JsonFormat(shape =JsonFormat.Shape.STRING,pattern = "dd/mm/yyyy")
     public Date fechaDeRegistro;
-    @JsonFormat(shape =JsonFormat.Shape.STRING,pattern = "dd/mm/yyyy")
     public Date fechaDeNacimiento;
     public  String nombre;
     public String domicilio;

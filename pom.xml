@@ -26,19 +26,19 @@
       <scope>test</scope>
     </dependency>
 
-
-   <!-- Dependencia de Hibernate -->
+    <!-- broker-->
     <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
-      <version>5.4.30.Final</version>
+      <groupId>org.eclipse.paho</groupId>
+      <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+      <version>1.2.5</version>
     </dependency>
+
 
     <!-- Dependencia de Hibernate JPA -->
     <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-entitymanager</artifactId>
-      <version>5.4.30.Final</version>
+      <groupId>io.github.flbulgarelli</groupId>
+      <artifactId>jpa-extras</artifactId>
+      <version>1.0.0-rc1</version>
     </dependency>
 
     <!-- Dependencia del Conector MySQL -->
@@ -47,14 +47,14 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.28</version>
     </dependency>
-
-    <!-- Dependencia de JPA -->
+    <!-- hsqldb -->
     <dependency>
-      <groupId>javax.persistence</groupId>
-      <artifactId>javax.persistence-api</artifactId>
-      <version>2.2</version>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <version>2.4.0</version>
+      <scope>provided</scope>
     </dependency>
- 
+
     <dependency>
       <groupId>io.javalin</groupId>
       <artifactId>javalin</artifactId>
@@ -130,11 +130,7 @@
       <artifactId>converter-gson</artifactId>
       <version>2.9.0</version>
     </dependency>
-    <dependency>
-      <groupId>com.squareup.okhttp3</groupId>
-      <artifactId>okhttp</artifactId>
-      <version>4.9.1</version>
-    </dependency>
+
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
@@ -160,6 +156,20 @@
       <version>5.5.0</version>
     </dependency>
 
+
+    <dependency>
+      <groupId>com.itextpdf</groupId>
+      <artifactId>itext7-core</artifactId>
+      <version>8.0.2</version>
+      <type>pom</type>
+    </dependency>
+
+    <!--cron job -->
+    <dependency>
+      <groupId>org.quartz-scheduler</groupId>
+      <artifactId>quartz</artifactId>
+      <version>2.3.2</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>

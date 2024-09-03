@@ -1,15 +1,19 @@
 package domain.personas;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import domain.accesorios.CamposArchivo;
 import domain.accesorios.Contacto;
 import domain.accesorios.Documento;
-import domain.accesorios.TipoDocumento;
 import domain.calculadorPuntos.CalculadorPuntos;
-import domain.colaboraciones.*;
-import domain.incidentes.FallaTecnica;
+import domain.colaboraciones.DistribucionVianda;
+import domain.colaboraciones.DonacionDinero;
+import domain.colaboraciones.DonacionVianda;
+import domain.colaboraciones.TarjertaRepartida;
+import domain.enums.TipoIncidente;
+import domain.incidentes.Incidente;
+import domain.incidentes.IncidenteFalla;
 import domain.objetos.Heladera;
 import domain.objetos.Oferta;
+import domain.objetos.TarjetaColaborador;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,7 +38,7 @@ public class Humano  {
     private List<DistribucionVianda> distribucionViandas;
     private List<DonacionVianda> donacionViandas;
     private List<DonacionDinero> donacionDinero;
-
+    private TarjetaColaborador tarjetaColaborador;
     private List<Oferta> ofertasCanjeadas;
     private CalculadorPuntos calculador;
     public Humano(){
@@ -72,12 +76,12 @@ public class Humano  {
     }
     public double cantDistribucionVianda(){
 
-        return this.distribucionViandas.stream().mapToDouble(d->d.getCantidadViandas()).sum();
+        return this.distribucionViandas.stream().mapToDouble(DistribucionVianda::getCantidadViandas).sum();
     }
 
-    public void reportarFallaTecnica(Heladera heladera,String descripcion){
-        FallaTecnica falla = new FallaTecnica(heladera,this, descripcion);
-        falla.reportar();
+    public void reportarFallaTecnica(Heladera heladera,String descripcion,String urlFoto){
+        Incidente falla = new IncidenteFalla(heladera, TipoIncidente.FALLA_TECNICA,this,descripcion,urlFoto);
+        falla.reportarIncidente("Falla Tecnica!!Hay un desperfecto en la heladera d ");
     }
 
     public boolean agregarColaboracion(DistribucionVianda contribucion) {
@@ -98,10 +102,10 @@ public class Humano  {
 
     }
     public  double puntosCanjeados(){
-        return this.ofertasCanjeadas.stream().mapToDouble(oferta->oferta.getPuntosNecesarios()).sum();
+        return this.ofertasCanjeadas.stream().mapToDouble(Oferta::getPuntosNecesarios).sum();
     }
     public double pesosDonados(){
-        return  this.donacionDinero.stream().mapToDouble(donacion->donacion.getMonto()).sum();
+        return  this.donacionDinero.stream().mapToDouble(DonacionDinero::getMonto).sum();
     }
 
     public void imprimir(){

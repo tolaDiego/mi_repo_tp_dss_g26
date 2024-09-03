@@ -1,6 +1,7 @@
 package domain.lectorCSV;
 
 import domain.personas.Humano;
+
 import java.util.List;
 
 public class Lectura {

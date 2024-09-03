@@ -5,14 +5,12 @@ import domain.personas.Juridica;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.awt.image.BufferedImage;
-
 @Setter
 @Getter
 public class Oferta {
     private  String nombre;
     private double puntosNecesarios;
-    private BufferedImage imagen;
+    private String imagen;
 
     public Oferta(){}
 

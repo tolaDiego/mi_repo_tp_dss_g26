@@ -1,10 +1,10 @@
 package domain.validador.validaciones;
 
-import static java.nio.file.Files.lines;
-
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
+
+import static java.nio.file.Files.lines;
 
 public class EsDebil implements Validacion {
   public boolean validar(String nuevaContrasenia) {

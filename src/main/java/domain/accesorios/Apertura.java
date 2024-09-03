@@ -2,21 +2,20 @@ package domain.accesorios;
 
 import domain.objetos.Heladera;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class Apertura {
     private Heladera heladeraUsada;
-
-    public Calendar getFechaDeUso() {
+    private Date fechaDeUso;
+    public Date getFechaDeUso() {
         return fechaDeUso;
     }
 
-    public void setFechaDeUso(Calendar fechaDeUso) {
+    public void setFechaDeUso(Date fechaDeUso) {
         this.fechaDeUso = fechaDeUso;
     }
 
-    private Calendar fechaDeUso;
+
 
     public Heladera getHeladeraUsada() {
         return heladeraUsada;
