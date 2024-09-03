@@ -12,9 +12,13 @@ public class Notificador {
     @Getter
     private AdapterMedioNotificacion medioDeNotificacion;
     private List<Mensaje> mensajes;
+    public Notificador(AdapterMedioNotificacion medio){
+        this.mensajes=new ArrayList<>();
+        this.medioDeNotificacion=medio;
+    }
     public  void cambiarMedioDeNotificacion(AdapterMedioNotificacion nuevoMedio ){
         this.medioDeNotificacion=nuevoMedio;
-        this.mensajes=new ArrayList<>();
+
     }
     public  void enviarNotificacion(Contacto contacto , Mensaje mensaje){
         medioDeNotificacion.notificar(contacto,mensaje);

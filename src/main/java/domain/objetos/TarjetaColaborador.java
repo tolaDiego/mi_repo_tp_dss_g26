@@ -29,14 +29,33 @@ public class TarjetaColaborador {
     }
 
     public boolean chequearSolicitud(AperturaColab nuevaApertura){
-        List<SolicitudApertura> filtradas;
-        List<Calendar> horarios,horariosMaximos;
+//        List<SolicitudApertura> filtradas;
+//        List<Calendar> horarios,horariosMaximos;
+//
+//        filtradas = solicitudes.stream().filter(solicitud -> solicitud.getHeladeraSolicitada().equals(nuevaApertura.getHeladeraUsada())).toList();
+//        horarios = filtradas.stream().map(SolicitudApertura::getFechaDeSolicutud).toList();
+//        horarios.forEach(a->a.add(Calendar.HOUR_OF_DAY,horasLimite));
+//
+//
+//        return horarios.stream().anyMatch(horario -> (horario.compareTo(nuevaApertura.getFechaDeUso())<0));
 
-        filtradas = solicitudes.stream().filter(solicitud -> solicitud.getHeladeraSolicitada().equals(nuevaApertura.getHeladeraUsada())).toList();
-        horarios = filtradas.stream().map(SolicitudApertura::getFechaDeSolicutud).toList();
-        horarios.forEach(a->a.add(Calendar.HOUR_OF_DAY,horasLimite));
+            // Filtrar las solicitudes que coinciden con la heladera solicitada
+            List<SolicitudApertura> filtradas = solicitudes.stream()
+                    .filter(solicitud -> solicitud.getHeladeraSolicitada().equals(nuevaApertura.getHeladeraUsada()))
+                    .toList();
 
+            // Calcular el tiempo límite para cada solicitud filtrada
+            List<Calendar> horariosLimite = filtradas.stream()
+                    .map(solicitud -> {
+                        Calendar limite = (Calendar) solicitud.getFechaDeSolicutud().clone();
+                        limite.add(Calendar.HOUR_OF_DAY, horasLimite);
+                        return limite;
+                    })
+                    .toList();
 
-        return horarios.stream().anyMatch(horario -> (horario.compareTo(nuevaApertura.getFechaDeUso())<0));
+            // Verificar si alguna de las solicitudes supera el límite permitido
+            return horariosLimite.stream()
+                    .anyMatch(horarioLimite -> nuevaApertura.getFechaDeUso().before(horarioLimite));
+
     }
 }

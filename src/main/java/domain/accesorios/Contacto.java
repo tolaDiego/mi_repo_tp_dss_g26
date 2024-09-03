@@ -11,5 +11,4 @@ public  class Contacto {
     private String tipoContacto;
     private String contacto;
 
-
 }

@@ -2,11 +2,14 @@ package domain.objetos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import domain.accesorios.Ubicacion;
+import domain.incidentes.Incidente;
+import domain.objetos.sensorTemp.SensorTemperatura;
 import lombok.Getter;
 import lombok.Setter;
+import suscripciones.ISuscripcionObservable;
 
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -20,13 +23,27 @@ public class Heladera {
     private SensorDeMovimiento sensorMovimiento;
     private SensorTemperatura sensorTemperatura;
     private List<Vianda> viandas;
-
+    private List<Vianda> viandasRetiradas;
+    private List<Vianda> viandasColocadas;
+    private List<Incidente> incidentes;
+    private ISuscripcionObservable escucharStockMax;
+    private ISuscripcionObservable escucharStockMin;
+    private ISuscripcionObservable escucharEstado;
     private boolean estadoActivo;
-    public void cambiarEstado (boolean estado) {
-        estadoActivo = estado;
-        if(!estado){ fechaFinalServicio= Calendar.getInstance();}
-        else{fechaInicioFuncionamiento = Calendar.getInstance();}
+    public Heladera(){
+        viandasRetiradas=new ArrayList<>();
+        viandasColocadas=new ArrayList<>();
+        incidentes=new ArrayList<>();
 
+    }
+
+    public void setEstadoActivo (boolean estado) {
+        estadoActivo = estado;
+        if(!estado){
+            fechaFinalServicio= Calendar.getInstance();
+        }
+        else{fechaInicioFuncionamiento = Calendar.getInstance();}
+        escucharEstado.notificar(this);
     }
 
     public long mesesActiva() {
@@ -41,12 +58,27 @@ public class Heladera {
 
         return Math.abs((anioFinal - anioInicial) * 12 + mesFinal - mesInicio);
     }
-
-    public void sacarVianda(int idVianda){
-      viandas.remove(idVianda);
+//    public void sacarVianda(int idVianda){
+//      viandasRetiradas.remove(idVianda);
+//    }
+    public void sacarViandas(List<Vianda> viandaRetiradas){
+        viandasRetiradas.addAll(viandaRetiradas);
+        escucharStockMin.notificar(this);
     }
-
     public void agregarViandas(List<Vianda> viandasNuevas){
-      viandas.addAll(viandasNuevas);
+
+      viandasColocadas.addAll(viandasNuevas);
+      escucharStockMax.notificar(this);
+    }
+    public int cantidadViandasActuales(){
+        return   viandasColocadas.size()-viandasRetiradas.size();
+    }
+    public int cantidadIncidentes() {return incidentes.size();}
+    public int cantidadViandasColocadas() {
+        return viandasColocadas.size();
+
+    }
+    public int cantidadViandasRetiradas() {
+        return viandasRetiradas.size();
     }
 }

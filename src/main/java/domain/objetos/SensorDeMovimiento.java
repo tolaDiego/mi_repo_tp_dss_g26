@@ -1,12 +1,16 @@
 package domain.objetos;
 
-import domain.incidentes.AlertaFraude;
+import domain.enums.TipoIncidente;
 import domain.incidentes.Incidente;
+import domain.incidentes.IncidenteAlerta;
 
-public class SensorDeMovimiento implements Sensor {
-    public void enviarAlerta(Heladera heladera){
-        Incidente incidente = new AlertaFraude(heladera);
-        incidente.reportar();
+import java.util.Date;
+
+public class SensorDeMovimiento   {
+    private Heladera heladera;
+    public void procesarAlerta(){
+          Incidente aperturaNoRegistrada= new IncidenteAlerta(new Date(),this.heladera, TipoIncidente.ALERTA_FRAUDE);
+           aperturaNoRegistrada.reportarIncidente("Alerta!!Se intento realizar un movimiento no programado en: "+this.heladera.getUbicacion().getDireccion());
         }
     }
 

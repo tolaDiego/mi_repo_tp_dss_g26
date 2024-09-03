@@ -12,4 +12,8 @@ import java.util.Date;
 public class Mensaje {
     private  String descripcion;
     private Date fechaNotificacion;
+
+    public Mensaje() {
+
+    }
 }

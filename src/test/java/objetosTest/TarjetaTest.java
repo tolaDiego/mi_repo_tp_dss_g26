@@ -1,6 +1,5 @@
 package objetosTest;
 
-import java.util.Calendar;
 import domain.accesorios.Apertura;
 import domain.objetos.Heladera;
 import domain.objetos.TarjetaVulnerable;
@@ -17,6 +16,7 @@ public class TarjetaTest {
     private TarjetaVulnerable tarjeta1;
     private Vulnerable vulnerable;
 
+    @BeforeEach
     void setUp() {
         apertura1 = new Apertura();
         apertura2 = new Apertura();
@@ -33,12 +33,12 @@ public class TarjetaTest {
         apertura3.setFechaDeUso(calendar);
 
     }
-
+    @Test
     public void testCargaDeApertura(){
         tarjeta1.agregarApertura(apertura1);
         Assertions.assertEquals(apertura1,tarjeta1.getAperturas());
     }
-
+    @Test
     public void testAperturasRestantes(){
         tarjeta1.agregarApertura(apertura1);
         tarjeta1.agregarApertura(apertura2);

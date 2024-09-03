@@ -4,9 +4,9 @@ import domain.accesorios.Apertura;
 import domain.personas.Vulnerable;
 import lombok.Getter;
 import lombok.Setter;
-import java.util.Calendar;
-import java.util.Date;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 @Setter
 @Getter
@@ -17,8 +17,9 @@ public class TarjetaVulnerable {
 
     private List<Apertura> aperturas;
 
-    public TarjetaVulnerable(){}
-
+    public TarjetaVulnerable(){
+        this.aperturas=new ArrayList<>();
+    }
     public void agregarApertura(Apertura nuevaApertura)
     {
         if(this.aperturasRestantes() > 0 ){

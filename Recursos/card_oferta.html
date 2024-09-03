@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="card_oferta.css">
+
+    <title>Title</title>
+
+</head>
+<body>
+<div class="offers-container">
+    <div class="add-offer-form">
+        <h3>Añadir Nueva Oferta</h3>
+        <form id="newOfferForm">
+            <input type="text" id="offerTitle" placeholder="Título de la Oferta" required>
+            <input type="text" id="offerDescription" placeholder="Descripción Corta" required>
+            <input type="number" id="offerPoints" placeholder="Coste en Puntos" required>
+            <input type="url" id="offerImage" placeholder="URL de la Imagen" >
+            <select id="offerCategory"placeholder="Rubro" required>
+                <option value="" disabled selected>Selecciona una Categoría</option>
+                <option value="Producto">Producto</option>
+                <option value="Servicio">Servicio</option>
+
+            </select>
+            <button type="submit">Añadir Oferta</button>
+        </form>
+    </div>
+    <div class="user-points">
+        <h3>Tus Puntos Acumulados: <span id="userPoints">1500</span></h3>
+    </div>
+
+
+    <div id="cardsContainer" class="cards">
+        <!-- Card 1 -->
+        <div class="card">
+            <img src="https://via.placeholder.com/150" alt="Oferta 1">
+            <div class="card-content">
+                <h4>Oferta 1</h4>
+                <p>Descripción corta de la oferta 1.</p>
+                <p><strong>Categoría: Producto</strong></p>
+                <p><strong>Coste: 100 Puntos</strong></p>
+                <button class="redeem-button">Canjear</button>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <img src="https://via.placeholder.com/150" alt="Oferta 2">
+            <div class="card-content">
+                <h4>Oferta 2</h4>
+                <p>Descripción corta de la oferta 2.</p>
+                <p><strong>Categoría: Servicio</strong></p>
+                <p><strong>Coste: 250 Puntos</strong></p>
+                <button class="redeem-button">Canjear</button>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+            <img src="https://via.placeholder.com/150" alt="Oferta 3">
+            <div class="card-content">
+                <h4>Oferta 3</h4>
+                <p>Descripción corta de la oferta 3.</p>
+                <p><strong>Categoría: Servicio</strong></p>
+                <p><strong>Coste: 500 Puntos</strong></p>
+                <button class="redeem-button">Canjear</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="card_oferta.js">
+
+</script>
+</body>
+</html>

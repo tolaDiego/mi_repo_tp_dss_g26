@@ -5,7 +5,7 @@ import domain.personas.Tecnico;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepoTecnicos {
+public class RepoTecnicos implements IRepoTecnico{
     private final List<Tecnico> tecnicos = new ArrayList<>();
     public boolean agregarTecnico(Tecnico tecnico) {
         return  tecnicos.add(tecnico);
@@ -30,4 +30,13 @@ public class RepoTecnicos {
     }
 
 
+    @Override
+    public List<Tecnico> getAll() {
+        return null;
+    }
+
+    @Override
+    public Tecnico getByid() {
+        return null;
+    }
 }
