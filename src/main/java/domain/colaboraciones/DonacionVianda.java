@@ -2,19 +2,25 @@ package domain.colaboraciones;
 
 import domain.objetos.Vianda;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Getter
 @Setter
-public class DonacionVianda implements Colaboracion{
+@NoArgsConstructor
+@Entity
+@Table(name = "donacion_vianda")
+public class DonacionVianda {
+    @Id
+    @GeneratedValue
+    private long id;
+    @OneToOne
+    @JoinColumn(name = "id_vianda")
     private Vianda vianda;
-    private double coefPorViandas;
-    private  boolean entregada;
-    public DonacionVianda(){
 
-    }
-    @Override
-    public double puntaje() {
-        return coefPorViandas;
-    }
+    @Column(name = "entregada", columnDefinition = "BOOLEAN")
+    private  boolean entregada;
+
 }

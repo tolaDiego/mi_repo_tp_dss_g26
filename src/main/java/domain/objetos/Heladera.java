@@ -8,13 +8,22 @@ import lombok.Getter;
 import lombok.Setter;
 import suscripciones.ISuscripcionObservable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "heladera")
 public class Heladera {
+    @Id
+    @GeneratedValue
+    private long id;
     private int capacidad;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Calendar fechaInicioFuncionamiento;

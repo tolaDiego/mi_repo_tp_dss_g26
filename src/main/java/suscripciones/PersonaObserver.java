@@ -3,6 +3,7 @@ package suscripciones;
 import adapters.notificadores.Mensaje;
 import adapters.notificadores.Notificador;
 import domain.accesorios.Contacto;
+import domain.enums.TipoContacto;
 import domain.personas.Humano;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,7 @@ public class PersonaObserver implements IPersonaObserver{
     private int stock;
     private Humano suscriptor;
     private Notificador notificador;
-    private  String tipoContacto;
+    private TipoContacto tipoContacto;
     public PersonaObserver(){
 
     }

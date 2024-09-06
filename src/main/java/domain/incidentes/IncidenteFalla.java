@@ -8,15 +8,36 @@ import domain.personas.Humano;
 import domain.personas.Tecnico;
 import heladerasDeZona.CalculadorZonaDeHeladeras;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.Date;
 @AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+
+@Entity
+@Table(name = "incidente_falla")
 public class IncidenteFalla implements Incidente{
+    @Id
+    @GeneratedValue
+    private long id;
+    @Column(name = "fecha_hora",columnDefinition = "DATETIME")
     private Date fechaHora;
+    @ManyToOne
+    @JoinColumn(name = "id_heladera")
     private Heladera heladeraAfectada;
+    @Enumerated(EnumType.STRING)
     private TipoIncidente tipo;
+    @ManyToOne
+    @JoinColumn(name = "id_colaborador")
     private Humano colaborador;
+    @Column(name = "descripcion",columnDefinition = "TEXT")
     private String descripcion;
+    @Column(name = "url_foto",columnDefinition = "VARCHAR(255)")
     private String urlFoto;
     public IncidenteFalla(Heladera heladeraAfectada, TipoIncidente tipo, Humano colaborador, String descripcion, String urlFoto) {
         this.heladeraAfectada = heladeraAfectada;

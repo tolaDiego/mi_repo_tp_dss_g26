@@ -1,6 +1,6 @@
 package domain.personas;
 
-import domain.accesorios.TipoEntidad;
+import domain.enums.TipoEntidad;
 import domain.calculadorPuntos.CalculadorPuntos;
 import domain.colaboraciones.ColabOferta;
 import domain.colaboraciones.DonacionDinero;

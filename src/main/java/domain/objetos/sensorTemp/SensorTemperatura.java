@@ -4,22 +4,34 @@ import domain.enums.TipoIncidente;
 import domain.incidentes.Incidente;
 import domain.incidentes.IncidenteAlerta;
 import domain.objetos.Heladera;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import javax.persistence.*;
 import java.util.Date;
 
 @Getter
 @Setter
-public class SensorTemperatura implements  Job {
+@NoArgsConstructor
+@AllArgsConstructor
 
+@Entity
+@Table(name = "sensor_temperatura")
+public class SensorTemperatura implements  Job {
+    @Id
+    @GeneratedValue
+    private long id;
     private double tempMaxima;
     private  double tempMinima;
     private  double ultimaTempRegistrada;
     private Date fechaUltimoRegistro;
+    @OneToOne
+    @JoinColumn(name = "id_heladera")
     private Heladera heladera;
     public boolean superaRangoDeTemperatura(double temperatura){
         return this.tempMinima>temperatura && temperatura>this.tempMaxima;

@@ -2,20 +2,24 @@ package domain.colaboraciones;
 
 import domain.objetos.Heladera;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
-public class ServicioAdministracion implements   Colaboracion{
+@NoArgsConstructor
+@Entity
+@Table(name="servicio_administracion")
+public class ServicioAdministracion {
+    @Id
+    @GeneratedValue
+    private long id;
+    @OneToOne
+    @JoinColumn (name = "id_heladera")
     private Heladera heladera;
-    private  double coefPorHeladeras;
-    public ServicioAdministracion() {
-        this.coefPorHeladeras=5;
-    }
-    @Override
-    public double puntaje(){
-            if(heladera.isEstadoActivo())
-              return coefPorHeladeras*heladera.mesesActiva()+1;
-            return coefPorHeladeras*heladera.mesesActiva();
-          }
+    @Column(name="fecha_registro_heladera",columnDefinition = "DATETIME")
+    private Date fechaRegistroHeladera;
 }

@@ -6,10 +6,10 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Setter
+@Getter
 public class Notificador {
-    @Setter
-    @Getter
+
     private AdapterMedioNotificacion medioDeNotificacion;
     private List<Mensaje> mensajes;
     public Notificador(AdapterMedioNotificacion medio){

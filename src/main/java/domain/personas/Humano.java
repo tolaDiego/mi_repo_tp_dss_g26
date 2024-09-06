@@ -7,7 +7,7 @@ import domain.calculadorPuntos.CalculadorPuntos;
 import domain.colaboraciones.DistribucionVianda;
 import domain.colaboraciones.DonacionDinero;
 import domain.colaboraciones.DonacionVianda;
-import domain.colaboraciones.TarjertaRepartida;
+import domain.colaboraciones.ColabEntregaDeTarjeta;
 import domain.enums.TipoIncidente;
 import domain.incidentes.Incidente;
 import domain.incidentes.IncidenteFalla;
@@ -17,15 +17,23 @@ import domain.objetos.TarjetaColaborador;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Setter
 @Getter
+@Entity
+@Table(name = "humano")
 public class Humano  {
+    @Id
+    @GeneratedValue
+    private long id;
     private Documento documento;
-    private int id=0;
 
     private String nombre;
 
@@ -34,7 +42,7 @@ public class Humano  {
     @JsonFormat(shape =JsonFormat.Shape.STRING,pattern = "dd/mm/yyyy")
     private Date fechaNacimiento;
     private List<Contacto> contactos;
-    private List<TarjertaRepartida> tarjertaRepartidas;
+    private List<ColabEntregaDeTarjeta> tarjertaRepartidas;
     private List<DistribucionVianda> distribucionViandas;
     private List<DonacionVianda> donacionViandas;
     private List<DonacionDinero> donacionDinero;
@@ -87,7 +95,7 @@ public class Humano  {
     public boolean agregarColaboracion(DistribucionVianda contribucion) {
         return  this.distribucionViandas.add(contribucion);
     }
-    public boolean agregarColaboracion(TarjertaRepartida colab){
+    public boolean agregarColaboracion(ColabEntregaDeTarjeta colab){
         return  this.tarjertaRepartidas.add(colab);
     }
     public double calcularPuntos() {
