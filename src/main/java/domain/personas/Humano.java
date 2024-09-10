@@ -1,5 +1,6 @@
 package domain.personas;
 
+import adapters.notificadores.Notificador;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import domain.accesorios.Contacto;
 import domain.accesorios.Documento;
@@ -17,10 +18,7 @@ import domain.objetos.TarjetaColaborador;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,22 +31,43 @@ public class Humano  {
     @Id
     @GeneratedValue
     private long id;
+    @Embedded
     private Documento documento;
-
+    @Column(name = "nombre",columnDefinition = "VARCHAR(50)")
     private String nombre;
-
+    @Column(name = "nombre",columnDefinition = "VARCHAR(50)")
     private   String apellido;
+    @Column(name = "nombre",columnDefinition = "VARCHAR(200)")
     private String direccion;
     @JsonFormat(shape =JsonFormat.Shape.STRING,pattern = "dd/mm/yyyy")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "fecha_nacimiento",columnDefinition = "DATETIME")
     private Date fechaNacimiento;
+    @OneToMany
+    @JoinColumn(name = "id_humano")
     private List<Contacto> contactos;
+    @OneToMany
+    @JoinColumn(name="id_humano")
     private List<ColabEntregaDeTarjeta> tarjertaRepartidas;
+    @OneToMany
+    @JoinColumn(name="id_humano")
     private List<DistribucionVianda> distribucionViandas;
+    @OneToMany
+    @JoinColumn(name="id_humano")
     private List<DonacionVianda> donacionViandas;
+    @OneToMany
+    @JoinColumn(name="id_humano")
     private List<DonacionDinero> donacionDinero;
+    @OneToOne
+    @JoinColumn(name="id_humano")
     private TarjetaColaborador tarjetaColaborador;
+    @ManyToMany
     private List<Oferta> ofertasCanjeadas;
+    @Transient
     private CalculadorPuntos calculador;
+    @OneToOne
+    @JoinColumn(name = "id_notificador_colaborador")
+    private Notificador notificador;
     public Humano(){
         this.tarjertaRepartidas=new ArrayList<>();
         this.distribucionViandas = new ArrayList<>();

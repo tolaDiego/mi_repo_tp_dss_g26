@@ -26,12 +26,15 @@ public class SensorTemperatura implements  Job {
     @Id
     @GeneratedValue
     private long id;
+    @Column(name = "temperatura_maxima_grados")
     private double tempMaxima;
+    @Column(name = "temperatura_minima_grados",scale = 5,precision = 3)
     private  double tempMinima;
+    @Column(name = "temperatura_minima_grados",scale = 5,precision = 3)
     private  double ultimaTempRegistrada;
+    @Column(name = "fecha_ultimo_registro",columnDefinition = "DATETIME")
     private Date fechaUltimoRegistro;
-    @OneToOne
-    @JoinColumn(name = "id_heladera")
+    @OneToOne(mappedBy = "sensorTemperatura")
     private Heladera heladera;
     public boolean superaRangoDeTemperatura(double temperatura){
         return this.tempMinima>temperatura && temperatura>this.tempMaxima;

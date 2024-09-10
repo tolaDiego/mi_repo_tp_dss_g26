@@ -11,12 +11,10 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "area_cobertura")
+
+@Embeddable
 public class AreaCobertura {
-    @Id
-    @GeneratedValue
-    private long id;
+
     @Column(name = "latitud", precision = 9, scale = 6)
     private double latitud;
 

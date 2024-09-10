@@ -17,36 +17,15 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "incidente_alerta")
-public class IncidenteAlerta implements  Incidente{
-    @Id
-    @GeneratedValue
-    private long id;
-    @Column(name = "fecha_hoa",columnDefinition = "DATETIME")
-    private Date fechaHora;
-    @ManyToOne
-    @JoinColumn(name = "id_heladera")
-    private Heladera heladeraAfectada;
+@DiscriminatorValue("ALERTA")
+public class IncidenteAlerta extends   Incidente{
     @Enumerated(EnumType.STRING)
-    private TipoIncidente tipo;
-
+    private TipoIncidente tipoAlerta;
     public IncidenteAlerta(Date fechaHora, Heladera heladeraAfectada, TipoIncidente tipo) {
         this.fechaHora = fechaHora;
         this.heladeraAfectada = heladeraAfectada;
-        this.tipo = tipo;
+        this.tipoIncidente = tipo;
     }
 
-    @Override
-    public void reportarIncidente(String descripcion) {
-        heladeraAfectada.setEstadoActivo(false);
-        heladeraAfectada.getIncidentes().add(this);
-        //busacar tecnico mas cercano y enviar mensaje a tecnico
-        CalculadorZonaDeHeladeras calculadorZona=new CalculadorZonaDeHeladeras();
-        Tecnico tecnico=calculadorZona.tecnicoMasCercanoAHeladera(heladeraAfectada);
-                tecnico.getNotificador().enviarNotificacion(
-                tecnico.getContacto()
-                ,new Mensaje(descripcion,new Date()));
-
-    }
 
 }

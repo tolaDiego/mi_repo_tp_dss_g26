@@ -2,19 +2,29 @@ package domain.objetos;
 
 import domain.accesorios.AperturaColab;
 import domain.accesorios.SolicitudApertura;
-import domain.personas.Humano;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.Calendar;
 import java.util.List;
 @Setter
 @Getter
-
+@Entity
+@Table(name = "tarjeta_colaborador")
 public class TarjetaColaborador {
+
+   // private Humano colaborador;
+    @Id
+    @GeneratedValue
+    private long id;
+    @Column(name = "codigo")
     private long codigo;
-    private Humano colaborador;
+    @OneToMany
+    @JoinColumn(name = "id_tarjeta_colaborador")
     private List<AperturaColab> aperturas;
+    @OneToMany
+    @JoinColumn(name = "id_tarjeta_colaborador")
     private List<SolicitudApertura> solicitudes;
     private int horasLimite = 3;
 
@@ -47,7 +57,7 @@ public class TarjetaColaborador {
             // Calcular el tiempo límite para cada solicitud filtrada
             List<Calendar> horariosLimite = filtradas.stream()
                     .map(solicitud -> {
-                        Calendar limite = (Calendar) solicitud.getFechaDeSolicutud().clone();
+                        Calendar limite = (Calendar) solicitud.getFechaDeSolicitud().clone();
                         limite.add(Calendar.HOUR_OF_DAY, horasLimite);
                         return limite;
                     })

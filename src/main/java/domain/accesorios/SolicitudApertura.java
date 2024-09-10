@@ -22,11 +22,12 @@ public class SolicitudApertura {
     @ManyToOne
     @JoinColumn(name = "id_heladera")
     private Heladera heladeraSolicitada;
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_de_solicitud", columnDefinition = "DATETIME")
-    private Date fechaDeSolicutud;
+    private Date fechaDeSolicitud;
 
     public SolicitudApertura(Heladera heladeraSolicitada, Date fechaDeSolicutud) {
         this.heladeraSolicitada = heladeraSolicitada;
-        this.fechaDeSolicutud = fechaDeSolicutud;
+        this.fechaDeSolicitud = fechaDeSolicutud;
     }
 }

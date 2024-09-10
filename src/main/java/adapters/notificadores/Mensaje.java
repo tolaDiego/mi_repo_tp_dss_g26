@@ -18,10 +18,10 @@ import java.util.Date;
 public class Mensaje {
     @Id
     @GeneratedValue
-    @Column(name = "id")
     private long id;
     @Column(name = "descripcion",columnDefinition = "TEXT")
     private String descripcion;
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fechaNotificacion", columnDefinition = "DATETIME")
     private Date fechaNotificacion;
 

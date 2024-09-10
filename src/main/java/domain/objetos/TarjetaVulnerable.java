@@ -5,10 +5,7 @@ import domain.personas.Vulnerable;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,7 +18,11 @@ public class TarjetaVulnerable {
     @Id
     @GeneratedValue
     private long id;
+    @OneToMany
+    @JoinColumn(name="id_tarjeta_vulnerable")
     private List<Apertura> aperturas;
+    @ManyToOne
+    @JoinColumn(name= "id_persona_vulnerable")
     private Vulnerable personaVul;
 
     public TarjetaVulnerable() {

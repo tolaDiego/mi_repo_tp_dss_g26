@@ -18,6 +18,7 @@ public class ColabOferta {
     @OneToOne
     @JoinColumn(name = "id_oferta")
     private Oferta oferta;
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_contribucion",columnDefinition = "DATETIME")
     private Date fechaContribucion;
 

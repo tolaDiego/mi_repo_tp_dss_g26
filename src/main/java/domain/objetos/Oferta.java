@@ -6,22 +6,22 @@ import jdk.jfr.Enabled;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Setter
 @Getter
+
 @Entity
 @Table(name = "oferta")
 public class Oferta {
     @Id
     @GeneratedValue
     private long id;
-
+    @Column(name = "nombre",columnDefinition = "VARCHAR(100)")
     private  String nombre;
+    @Column(name = "puntos_necesarios",scale = 9,precision = 2)
     private double puntosNecesarios;
+    @Column(name = "nombre",columnDefinition = "VARCHAR(255)")
     private String imagen;
 
     public Oferta(){}

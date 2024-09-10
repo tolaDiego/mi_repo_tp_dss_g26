@@ -6,17 +6,18 @@ import heladerasDeZona.CalculadorZonaDeHeladeras;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Getter
 @Setter
-public class SuscripcionAIncidentesObservable implements ISuscripcionObservable{
-    private List<PersonaObserver> suscriptores;
-    public SuscripcionAIncidentesObservable(){
-        this.suscriptores=new ArrayList<>();
-    }
-    @Override
+@Entity
+@DiscriminatorValue("SUSCRIPCION_A_INCIDENTES")
+public class SuscripcionAIncidentesObservable extends ISuscripcionObservable{
+
+       @Override
     public void notificar(Heladera heladera) {
          for (PersonaObserver suscriptor : suscriptores) {
             Mensaje mensaje;
@@ -37,12 +38,5 @@ public class SuscripcionAIncidentesObservable implements ISuscripcionObservable{
             suscriptor.serNotificadoDeEvento(mensaje);
         }
     }
-    @Override
-    public void agregarSuscriptor(PersonaObserver personaObserver) {
-        suscriptores.add(personaObserver);
-    }
-    @Override
-    public void eliminarSuscriptor(PersonaObserver personaObserver) {
-        suscriptores.remove(personaObserver);
-    }
+
 }

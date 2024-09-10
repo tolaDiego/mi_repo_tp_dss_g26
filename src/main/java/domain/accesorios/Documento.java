@@ -8,18 +8,14 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@Entity
-@Table(name = "documento")
+@Embeddable
 public class Documento {
-    @Id
-    @GeneratedValue
-    private long id;
+
     @Column(name = "tipo_doc")
     @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDoc;
-    @Column(name = "numero",columnDefinition = "INTEGER")
-    private Integer numero;
+    @Column(name = "numero",columnDefinition = "VARCHAR(10)")
+    private String numero;
     public Documento(){}
 
     public Documento(TipoDocumento tipoDoc, String numero) {
