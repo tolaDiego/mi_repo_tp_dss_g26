@@ -42,6 +42,8 @@
         <class>domain.incidentes.Incidente</class>
         <class>domain.incidentes.IncidenteAlerta</class>
         <class>domain.incidentes.IncidenteFalla</class>
+        <class>domain.personas.Tecnico</class>
+
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>
 

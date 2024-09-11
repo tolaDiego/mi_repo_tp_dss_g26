@@ -6,5 +6,10 @@ import java.util.List;
 
 public interface IRepoTecnico {
     List<Tecnico> getAll();
-    Tecnico getByid();
+
+    Tecnico getById(long id);
+
+    void update(Tecnico t);
+
+    void insert(Tecnico tecnico);
 }

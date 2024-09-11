@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 
-public class testsRepoHeladera {
+public class TestsRepoHeladera {
     private EntityManagerFactory emf;
     private EntityManager em;
     private RepoHeladera repoHeladera;

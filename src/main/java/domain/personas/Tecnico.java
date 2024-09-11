@@ -31,7 +31,7 @@ public class Tecnico {
     private Contacto contacto;
     @Embedded
     private AreaCobertura areaCobertura;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_notificador_tecnico")
     private Notificador notificador;
     public  Tecnico(Notificador notif){
