@@ -31,8 +31,8 @@ public class Heladera {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_final_funcionamiento", columnDefinition = "DATETIME")
     private Calendar fechaFinalServicio;
-    @ManyToOne
-    @Column(name = "id_ubicacion")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_ubicacion")
     private Ubicacion ubicacion;
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_sensor_movimiento")
@@ -40,26 +40,21 @@ public class Heladera {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_sensor_temperatura")
     private SensorTemperatura sensorTemperatura;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_heladera")  // Clave foránea en la tabla vianda
     private List<Vianda> viandas;
-//    @OneToMany
-//    @JoinColumn(name = "id_heladera")  // Clave foránea en la tabla vianda
-//    private List<Vianda> viandasRetiradas;
-//    @OneToMany
-//    @JoinColumn(name = "id_heladera")  // Clave foránea en la tabla vianda
-//    private List<Vianda> viandasColocadas;
-    @OneToMany(mappedBy = "heladeraAfectada")
+
+    @OneToMany(mappedBy = "heladeraAfectada",cascade = CascadeType.PERSIST)
     private List<Incidente> incidentes;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "stock_max_id")
     private ISuscripcionObservable escucharStockMax;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "stock_min_id")
     private ISuscripcionObservable escucharStockMin;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "estado_id")
     private ISuscripcionObservable escucharEstado;
 
@@ -67,7 +62,7 @@ public class Heladera {
     private boolean estadoActivo;
     public Heladera(){
         viandas=new ArrayList<>();
-//        viandasColocadas=new ArrayList<>();
+
         incidentes=new ArrayList<>();
 
     }
@@ -78,7 +73,9 @@ public class Heladera {
             fechaFinalServicio= Calendar.getInstance();
         }
         else{fechaInicioFuncionamiento = Calendar.getInstance();}
-        escucharEstado.notificar(this);
+        if(escucharEstado!=null) {
+            escucharEstado.notificar(this);
+        }
     }
 
     public long mesesActiva() {
@@ -124,5 +121,33 @@ public class Heladera {
     }
     public int cantidadViandasRetiradas() {
         return viandas.stream().filter(v->v.getEstadoVianda().equals(EstadoVianda.RETIRADA)).toList().size();
+    }
+
+    public void setSensorMovimiento(SensorDeMovimiento sensorMovimiento) {
+        this.sensorMovimiento = sensorMovimiento;
+        sensorMovimiento.setHeladera(this);
+    }
+
+    public void setSensorTemperatura(SensorTemperatura sensorTemperatura) {
+        this.sensorTemperatura = sensorTemperatura;
+        sensorTemperatura.setHeladera(this);
+    }
+    @Override
+    public String toString() {
+        return "Heladera{" +
+                "\nid=" + id +
+                "\n, capacidad=" + capacidad +
+                "\n, fechaInicioFuncionamiento=" + (fechaInicioFuncionamiento != null ? fechaInicioFuncionamiento.getTime() : "N/A") +
+                "\n, fechaFinalServicio=" + (fechaFinalServicio != null ? fechaFinalServicio.getTime() : "N/A") +
+                "\n, ubicacion=" + (ubicacion != null ? ubicacion.toString() : "N/A") +
+                "\n, sensorMovimiento=" + (sensorMovimiento != null ? sensorMovimiento.toString() : "N/A") +
+                "\n, sensorTemperatura=" + (sensorTemperatura != null ? sensorTemperatura.toString() : "N/A") +
+                "\n, viandas=" + (viandas != null ? viandas.size() : 0) +
+                "\n, incidentes=" + (incidentes != null ? incidentes.size() : 0) +
+                "\n, escucharStockMax=" + (escucharStockMax != null ? escucharStockMax.toString() : "N/A") +
+                "\n, escucharStockMin=" + (escucharStockMin != null ? escucharStockMin.toString() : "N/A") +
+                "\n, escucharEstado=" + (escucharEstado != null ? escucharEstado.toString() : "N/A") +
+                "\n, estadoActivo=" + estadoActivo +
+                '}';
     }
 }

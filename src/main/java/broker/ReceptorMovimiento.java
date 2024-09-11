@@ -12,7 +12,7 @@ public class ReceptorMovimiento implements IMqttMessageListener {
 // Extraer el ID de la heladera del topic
         String[] topicParts = topic.split("/");
         String heladeraId = topicParts[1]; // "heladeras/{id}/alertas/{tipo}"
-        Heladera heladera=repoHeladera.getById(heladeraId);
+        Heladera heladera=repoHeladera.getById(Long.parseLong(heladeraId));
         heladera.getSensorMovimiento().procesarAlerta();
         System.out.println("Mensaje recibido de topic: " + topic );
 

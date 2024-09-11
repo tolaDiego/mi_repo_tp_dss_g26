@@ -1,10 +1,29 @@
 package main;
 
 
+import domain.accesorios.Ubicacion;
+import domain.enums.TipoIncidente;
+import domain.incidentes.IncidenteAlerta;
+import domain.objetos.Heladera;
+import domain.objetos.SensorDeMovimiento;
+import domain.objetos.Vianda;
+import domain.objetos.sensorTemp.SensorTemperatura;
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import repositorio.IRepoHeladera;
+import repositorio.RepoHeladera;
+import suscripciones.ISuscripcionObservable;
+import suscripciones.SuscripcionAIncidentesObservable;
+import suscripciones.SuscripcionAStockMaxObservable;
+import suscripciones.SuscripcionAStockMinObservable;
+
 import java.io.IOException;
 
+import java.util.Calendar;
 
-public class App {
+
+
+public class App implements WithSimplePersistenceUnit {
+    private RepoHeladera repoHeladera=new RepoHeladera();
     public static void main(String[] args) throws IOException {
 //        Javalin app;
 //        app = Javalin.create().start(8082);
@@ -95,8 +114,58 @@ public class App {
 //        hilo1R.start(); // Inicia el segundo hilo
 //        hilo2P.start(); // Inicia el primer hilo
 //
+        App instancia=new App();
 
+            //instancia.guardarHeladera();
+            Heladera unaHeladera=instancia.obtenerHeladera();
+            System.out.println("heladera recuperada id=1: \n"+unaHeladera.toString());
+        }
 
+        public void guardarHeladera(){
+            Heladera heladera=new Heladera();
+            // Inicializar atributos de Heladera
+            heladera.setCapacidad(10); // Capacidad de la heladera
+
+            // Inicializar fechas
+            Calendar fechaInicio = Calendar.getInstance(); // Fecha actual para el inicio de funcionamiento
+            fechaInicio.add(Calendar.YEAR,-2);
+            heladera.setFechaInicioFuncionamiento(fechaInicio);
+
+            // Opcional: Inicializar fecha final
+
+            heladera.setFechaFinalServicio(Calendar.getInstance());
+
+            // Inicializar ubicación (supongamos que ya tienes una instancia de Ubicacion)
+            Ubicacion ubicacion = new Ubicacion(); // Crear ubicación o obtener una existente
+            ubicacion.setDireccion("Calle TODISIMA 123");
+            heladera.setUbicacion(ubicacion);
+
+            SensorDeMovimiento sensorMovimiento = new SensorDeMovimiento();
+            heladera.setSensorMovimiento(sensorMovimiento);
+
+            SensorTemperatura sensorTemperatura = new SensorTemperatura();
+            sensorTemperatura.setTempMinima(2);
+            sensorTemperatura.setTempMaxima(8);
+            heladera.setSensorTemperatura(sensorTemperatura);
+
+            heladera.setEstadoActivo(true);
+
+            Vianda vianda = new Vianda();
+            vianda.setNombre("Alfajor");
+            heladera.getViandas().add(vianda);
+            heladera.getIncidentes().add(new IncidenteAlerta(TipoIncidente.ALERTA_TEMPERATURA));
+            ISuscripcionObservable stockMax=new SuscripcionAStockMaxObservable();
+            ISuscripcionObservable stockMin = new SuscripcionAStockMinObservable();
+            ISuscripcionObservable stockIncidente = new SuscripcionAIncidentesObservable();
+
+            heladera.setEscucharStockMin(stockMin);
+            heladera.setEscucharStockMax(stockMax);
+            heladera.setEscucharEstado(stockIncidente);
+            withTransaction(()->{ repoHeladera.insert(heladera);});
+
+        }
+        public Heladera obtenerHeladera(){
+              return repoHeladera.getById(1);
         }
 
 

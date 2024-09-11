@@ -21,7 +21,7 @@ public class Oferta {
     private  String nombre;
     @Column(name = "puntos_necesarios",scale = 9,precision = 2)
     private double puntosNecesarios;
-    @Column(name = "nombre",columnDefinition = "VARCHAR(255)")
+    @Column(name = "imagen",columnDefinition = "VARCHAR(255)")
     private String imagen;
 
     public Oferta(){}

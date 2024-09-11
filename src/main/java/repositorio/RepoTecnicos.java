@@ -1,14 +1,15 @@
 package repositorio;
 
 import domain.personas.Tecnico;
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepoTecnicos implements IRepoTecnico{
+public class RepoTecnicos implements IRepoTecnico, WithSimplePersistenceUnit {
     private final List<Tecnico> tecnicos = new ArrayList<>();
-    public boolean agregarTecnico(Tecnico tecnico) {
-        return  tecnicos.add(tecnico);
+    public void agregarTecnico(Tecnico tecnico) {
+        entityManager().persist(tecnico);
     }
     public List<Tecnico> retornarTecnicos() {
         return tecnicos;

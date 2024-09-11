@@ -30,7 +30,7 @@ public class SensorTemperatura implements  Job {
     private double tempMaxima;
     @Column(name = "temperatura_minima_grados",scale = 5,precision = 3)
     private  double tempMinima;
-    @Column(name = "temperatura_minima_grados",scale = 5,precision = 3)
+    @Column(name = "ultima_temperatura_grados",scale = 5,precision = 3)
     private  double ultimaTempRegistrada;
     @Column(name = "fecha_ultimo_registro",columnDefinition = "DATETIME")
     private Date fechaUltimoRegistro;

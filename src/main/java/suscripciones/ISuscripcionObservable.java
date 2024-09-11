@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
+
 @Setter
 @Getter
 @Entity
@@ -22,6 +22,7 @@ public abstract class ISuscripcionObservable {
     @OneToMany
     @JoinColumn(name = "id_suscipcion_obervable")
     protected List<PersonaObserver> suscriptores = new ArrayList<>();
+
 
     public abstract void notificar(Heladera heladera);
 

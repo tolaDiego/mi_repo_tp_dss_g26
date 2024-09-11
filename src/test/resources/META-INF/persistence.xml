@@ -8,27 +8,60 @@
     <persistence-unit name="simple-persistence-unit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-
+        <class>domain.objetos.Heladera</class>
+        <class>domain.objetos.sensorTemp.SensorTemperatura</class>
+        <class>domain.objetos.SensorDeMovimiento</class>
+        <class>domain.objetos.Vianda</class>
+        <class>suscripciones.ISuscripcionObservable</class>
+        <class>domain.accesorios.Ubicacion</class>
+        <class>suscripciones.SuscripcionAIncidentesObservable</class>
+        <class>suscripciones.SuscripcionAStockMaxObservable</class>
+        <class>suscripciones.PersonaObserver</class>
+        <class>suscripciones.SuscripcionAStockMinObservable</class>
+        <class>domain.personas.Humano</class>
+        <class>adapters.notificadores.Notificador</class>
+        <class>adapters.notificadores.AdapterMedioNotifTelegram</class>
+        <class>adapters.notificadores.AdapterMedioNotifwhatsapp</class>
+        <class>adapters.notificadores.AdapterMedioNotifMailSender</class>
+        <class>adapters.notificadores.Mensaje</class>
+        <class>domain.objetos.TarjetaColaborador</class>
+        <class> domain.accesorios.SolicitudApertura</class>
+        <class> domain.accesorios.Apertura</class>
+        <class> domain.accesorios.Documento</class>
+        <class> domain.accesorios.Contacto</class>
+<class>domain.colaboraciones.ColabEntregaDeTarjeta</class>
+        <class>domain.objetos.TarjetaVulnerable</class>
+        <class>domain.accesorios.AperturaColab</class>
+        <class> domain.personas.Vulnerable</class>
+<class>domain.objetos.Oferta</class>
+        <class>domain.colaboraciones.ColabOferta</class>
+        <class>domain.colaboraciones.DonacionDinero</class>
+        <class>domain.colaboraciones.ServicioAdministracion</class>
+        <class>domain.colaboraciones.DistribucionVianda</class>
+        <class>domain.colaboraciones.DonacionVianda</class>
+        <class>domain.incidentes.Incidente</class>
+        <class>domain.incidentes.IncidenteAlerta</class>
+        <class>domain.incidentes.IncidenteFalla</class>
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>
 
             <!-- comentar esta seccion para ejecutar tests en memoria, excepto para context test-->
-             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+             <!--<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/sistema_viandas" />
             <property name="hibernate.connection.username" value="root" />
-            <property name="hibernate.connection.password" value="123456" />
-            <!-- para probar operaciones/tests en la bd de memoria, comentar esta seccion solo para probar el context test-->
+            <property name="hibernate.connection.password" value="123456" />-->
 
-           <!-- <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
+            <!-- para probar operaciones/tests en la bd de memoria, comentar esta seccion solo para probar el context test-->
+            <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
             <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:app-db"/>
             <property name="hibernate.connection.username" value="sa"/>
             <property name="hibernate.connection.password" value=""/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>-->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
 
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="use_sql_comments" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
         </properties>
 
     </persistence-unit>

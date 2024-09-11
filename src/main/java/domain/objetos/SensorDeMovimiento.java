@@ -3,9 +3,11 @@ package domain.objetos;
 import domain.enums.TipoIncidente;
 import domain.incidentes.Incidente;
 import domain.incidentes.IncidenteAlerta;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+@Setter
 @Entity
 @Table(name = "sensor_movimiento")
 public class SensorDeMovimiento   {

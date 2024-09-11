@@ -44,4 +44,8 @@ public abstract class Incidente {
             ,new Mensaje(mensaje,new Date()));
   }
 
+  public void setHeladeraAfectada(Heladera heladeraAfectada) {
+    this.heladeraAfectada = heladeraAfectada;
+    heladeraAfectada.getIncidentes().add(this);
+  }
 }

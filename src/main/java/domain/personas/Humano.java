@@ -35,9 +35,9 @@ public class Humano  {
     private Documento documento;
     @Column(name = "nombre",columnDefinition = "VARCHAR(50)")
     private String nombre;
-    @Column(name = "nombre",columnDefinition = "VARCHAR(50)")
+    @Column(name = "apellido",columnDefinition = "VARCHAR(50)")
     private   String apellido;
-    @Column(name = "nombre",columnDefinition = "VARCHAR(200)")
+    @Column(name = "direccion",columnDefinition = "VARCHAR(200)")
     private String direccion;
     @JsonFormat(shape =JsonFormat.Shape.STRING,pattern = "dd/mm/yyyy")
     @Temporal(TemporalType.TIMESTAMP)
